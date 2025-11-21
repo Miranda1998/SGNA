@@ -64,8 +64,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                 var_dict[var_name] = model.addVar(vtype="B", name=var_name)
 
         # drones num for each location
-        initial_t = -1
-        all_time = Time_set.append(initial_t)
+        all_time = [-1] + Time_set
+        print("Time_set", Time_set)
+        print('alltime', all_time)
         for s in scenario_set:
             for u in bases_set:
                 for t in all_time:
@@ -230,8 +231,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                             var_dict[var_name] = model.addVar(vtype="B", name=var_name)
 
         # drones num for each location
-        initial_t = -1
-        all_time = Time_set.append(initial_t)
+        all_time = [-1] + Time_set
         for u in bases_set:
             for t in all_time:
                 var_name = f"b_{u}_{t}"

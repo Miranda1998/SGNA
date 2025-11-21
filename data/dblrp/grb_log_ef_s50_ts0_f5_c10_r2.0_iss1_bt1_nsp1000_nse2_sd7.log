@@ -1,0 +1,94 @@
+
+Gurobi 12.0.1 (win64) logging started Fri Nov 21 14:36:10 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s50_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse2_sd7.log"
+Set parameter NodefileStart to value 0.5
+Set parameter NodefileDir to value "node_files\s50_ts0"
+Set parameter MIPGap to value 0.0001
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 1
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3600
+NodefileStart  0.5
+Threads  1
+
+Optimize a model with 21291000 rows, 7123755 columns and 58687500 nonzeros
+Model fingerprint: 0xd6272589
+Variable types: 0 continuous, 7123755 integer (7087505 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+01]
+  Objective range  [2e-01, 1e+01]
+  Bounds range     [1e+00, 4e+01]
+  RHS range        [1e+00, 7e+01]
+Presolve removed 21119186 rows and 10500 columns (presolve time = 5s)...
+Presolve removed 21264966 rows and 7073312 columns
+Presolve time: 7.60s
+Presolved: 26034 rows, 50443 columns, 225107 nonzeros
+Variable types: 0 continuous, 50443 integer (39022 binary)
+Found heuristic solution: objective -50.0000000
+Found heuristic solution: objective -43.1542489
+Performing another presolve...
+Presolve removed 19732 rows and 26438 columns
+Presolve time: 0.64s
+Found heuristic solution: objective -42.6045496
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.6892725e+03   1.201137e+04   0.000000e+00     13s
+    4486    7.2928120e+01   0.000000e+00   0.000000e+00     13s
+
+Root relaxation: objective 7.292812e+01, 4486 iterations, 0.02 seconds (0.04 work units)
+Total elapsed time = 13.48s (DegenMoves)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   72.92812    0  959  -42.60455   72.92812   271%     -   13s
+     0     0   71.14557    0  958  -42.60455   71.14557   267%     -   13s
+     0     0   68.49345    0  467  -42.60455   68.49345   261%     -   13s
+     0     0   68.43646    0  446  -42.60455   68.43646   261%     -   13s
+H    0     0                     -12.6045496   68.43646   643%     -   13s
+H    0     0                      54.4233127   68.43646  25.7%     -   14s
+H    0     0                      56.5173771   68.43646  21.1%     -   14s
+H    0     0                      59.5340521   68.43646  15.0%     -   14s
+H    0     0                      61.5129078   68.43646  11.3%     -   15s
+H    0     0                      62.3620994   68.43646  9.74%     -   15s
+H    0     0                      62.8283377   68.43646  8.93%     -   15s
+     0     0   65.83539    0  301   62.82834   65.83539  4.79%     -   15s
+     0     0   65.81688    0  302   62.82834   65.81688  4.76%     -   15s
+H    0     0                      63.6682084   65.81358  3.37%     -   16s
+     0     0   65.16056    0  243   63.66821   65.16056  2.34%     -   16s
+     0     0   64.32315    0  153   63.66821   64.32315  1.03%     -   16s
+     0     0   64.32315    0  388   63.66821   64.32315  1.03%     -   17s
+     0     0   64.32315    0  388   63.66821   64.32315  1.03%     -   17s
+H    0     0                      63.8191884   64.32315  0.79%     -   17s
+H    0     0                      63.8356033   64.32315  0.76%     -   18s
+     0     0   64.32315    0  148   63.83560   64.32315  0.76%     -   18s
+H    0     0                      63.8393256   64.32315  0.76%     -   18s
+     0     0   64.24586    0   90   63.83933   64.24586  0.64%     -   18s
+     0     0   64.10626    0   95   63.83933   64.10626  0.42%     -   18s
+     0     0   64.05470    0   89   63.83933   64.05470  0.34%     -   18s
+     0     0   63.92421    0   41   63.83933   63.92421  0.13%     -   18s
+     0     0   63.92421    0   15   63.83933   63.92421  0.13%     -   18s
+     0     0     cutoff    0        63.83933   63.83933  0.00%     -   18s
+
+Cutting planes:
+  Gomory: 7
+  Clique: 5
+  Zero half: 3
+
+Explored 1 nodes (10766 simplex iterations) in 19.62 seconds (27.23 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 10: 63.8393 63.8393 63.8356 ... 62.0767
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.383932560817e+01, best bound 6.383932560817e+01, gap 0.0000%
+
+User-callback calls 2758, time in user-callback 4.78 sec

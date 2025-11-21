@@ -1,9 +1,9 @@
 
-Gurobi 12.0.1 (win64) logging started Thu Nov 20 19:30:57 2025
+Gurobi 12.0.1 (win64) logging started Fri Nov 21 19:05:56 2025
 
-Set parameter LogFile to value "data\dblrp\grb_log_ef_s50_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse50_sd7.log"
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s300_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse2_sd7.log"
 Set parameter NodefileStart to value 0.5
-Set parameter NodefileDir to value "node_files\s50_ts0"
+Set parameter NodefileDir to value "node_files\s300_ts0"
 Set parameter MIPGap to value 0.0001
 Set parameter TimeLimit to value 3600
 Set parameter Threads to value 1
@@ -17,20 +17,20 @@ TimeLimit  3600
 NodefileStart  0.5
 Threads  1
 
-Optimize a model with 86320250 rows, 28827005 columns and 238596250 nonzeros
-Model fingerprint: 0x598ff9d8
-Variable types: 0 continuous, 28827005 integer (28755005 binary)
+Optimize a model with 127746000 rows, 42742505 columns and 352125000 nonzeros
+Model fingerprint: 0x641c4fa6
+Variable types: 0 continuous, 42742505 integer (42525005 binary)
 Coefficient statistics:
-  Matrix range     [1e+00, 1e+02]
-  Objective range  [2e-01, 1e+01]
+  Matrix range     [1e+00, 7e+01]
+  Objective range  [3e-02, 1e+01]
   Bounds range     [1e+00, 4e+01]
   RHS range        [1e+00, 7e+01]
 
-Explored 0 nodes (0 simplex iterations) in 18.81 seconds (30.19 work units)
+Explored 0 nodes (0 simplex iterations) in 6.89 seconds (0.98 work units)
 Thread count was 1 (of 32 available processors)
 
 Solution count 0
 
 Best objective -, best bound -, gap -
 
-User-callback calls 588, time in user-callback 0.15 sec
+User-callback calls 26, time in user-callback 0.02 sec
