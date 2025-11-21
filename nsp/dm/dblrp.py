@@ -460,7 +460,9 @@ class DroneBaseLocationRoutingDataManager(DataManager):
             # 生成随机历史位置数据作为输入
             trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K)
             hist_real = inverse_points_minmax(trajs, minmax_norm)[0].detach().cpu().numpy()
-            scenarios.append(hist_real)
+            hist_real_half = hist_real[:, ::2, :].copy()  # 每隔一个时刻取一次，保留奇数索引
+            scenarios.append(hist_real_half)
+            print('Generated scenario shape:', hist_real_half.shape)
 
         return scenarios
 

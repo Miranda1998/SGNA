@@ -64,9 +64,11 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                 var_dict[var_name] = model.addVar(vtype="B", name=var_name)
 
         # drones num for each location
+        initial_t = -1
+        all_time = Time_set.append(initial_t)
         for s in scenario_set:
             for u in bases_set:
-                for t in Time_set:
+                for t in all_time:
                     var_name = f"b_{u}_{t}_{s}"
                     # bound lower and upper to solution
                     var_dict[var_name] = model.addVar(vtype="I", lb=0, ub=self.inst['n_drones'], name=var_name)
@@ -78,7 +80,6 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                     var_name = f"p_{i}_{t}_{s}"
                     # bound lower and upper to solution
                     var_dict[var_name] = model.addVar(vtype="I", lb=0, ub=self.inst['max_route_time'], name=var_name)
-
         print('Done1')
 
         # obj = 0
@@ -102,8 +103,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                         var_dict[f"x_{u}_{k}_{j}_{l}_{s}"] for k in Time_set for j in nodes_set for l in Time_set if l > k)
                     <= var_dict[f"y_{u}"] * self.inst['n_drones'],
                     name='constraint_base_location01_%s' % (u))
-
         print('Done2')
+
         for s in scenario_set:
             for u in bases_set:
                 model.addConstr(
@@ -111,22 +112,22 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                         var_dict[f"x_{j}_{l}_{u}_{k}_{s}"] for k in Time_set for j in nodes_set for l in Time_set if k > l)
                     <= var_dict[f"y_{u}"] * self.inst['n_drones'],
                     name='constraint_base_location02_%s_%s' % (u, s))
-
         print('Done3')
+
         for s in scenario_set:
             for u in bases_set:
                 for k in Time_set:
-                    if k - 1 >= 0:
-                        model.addConstr(
-                            gp.quicksum(var_dict[f"x_{u}_{k}_{j}_{l}_{s}"] for j in nodes_set for l in Time_set if l > k)
-                            - gp.quicksum(var_dict[f"x_{j}_{l}_{u}_{k}_{s}"] for j in nodes_set for l in Time_set if k > l)
-                            == var_dict[f"b_{u}_{k - 1}_{s}"] - var_dict[f"b_{u}_{k}_{s}"], name='constraint_bases_%s_%s_%s' % (u, k, s))
+                    model.addConstr(
+                        gp.quicksum(var_dict[f"x_{u}_{k}_{j}_{l}_{s}"] for j in nodes_set for l in Time_set if l > k)
+                        - gp.quicksum(var_dict[f"x_{j}_{l}_{u}_{k}_{s}"] for j in nodes_set for l in Time_set if k > l)
+                        == var_dict[f"b_{u}_{k - 1}_{s}"] - var_dict[f"b_{u}_{k}_{s}"], name='constraint_bases_%s_%s_%s' % (u, k, s))
 
         for s in scenario_set:
             for u in bases_set:
                 model.addConstr(
-                    var_dict[f"b_{u}_{0}_{s}"] == self.inst['drone_each_base'], name='constraint_initial_bases_%s_%s' % (u, s))
+                    var_dict[f"b_{u}_{-1}_{s}"] == self.inst['drone_each_base'], name='constraint_initial_bases_%s_%s' % (u, s))
         print('Done4')
+
         for s in scenario_set:
             for v in vessels_set:
                 for k in Time_set:
@@ -135,6 +136,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                         == gp.quicksum(var_dict[f"x_{j}_{l}_{v}_{k}_{s}"] for j in nodes_set for l in Time_set if k > l),
                         name='constraint_flow_balance_%s_%s_%s' % (v, k, s))
         print('Done5')
+
         for s in scenario_set:
             for v in nodes_set:
                 model.addConstr(
@@ -142,6 +144,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                 for l in Time_set if l > k) <= 1,
                     name='constraint_visit_most_once_%s_%s' % (v, s))
         print('Done6')
+
         for s in scenario_set:
             for v in vessels_set:
                 for k in Time_set:
@@ -154,6 +157,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                     >= var_dict[f"p_{j}_{l}_{s}"],
                                     name='constraint_max_route_time_01_%s_%s_%s_%s_%s' % (v, k, j, l, s))
         print('Done7')
+
         for s in scenario_set:
             for u in bases_set:
                 for k in Time_set:
@@ -165,6 +169,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                     >= var_dict[f"p_{j}_{l}_{s}"],
                                     name='constraint_max_route_time_02_%s_%s_%s_%s_%s' % (u, k, j, l, s))
         print('Done8')
+
         for s in scenario_set:
             for u in nodes_set:
                 for k in Time_set:
@@ -225,11 +230,14 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                             var_dict[var_name] = model.addVar(vtype="B", name=var_name)
 
         # drones num for each location
+        initial_t = -1
+        all_time = Time_set.append(initial_t)
         for u in bases_set:
-            for t in Time_set:
+            for t in all_time:
                 var_name = f"b_{u}_{t}"
                 # bound lower and upper to solution
                 var_dict[var_name] = model.addVar(vtype="I", lb=0, ub=self.inst['n_drones'], name=var_name)
+
 
         # drones num for each location
         for i in nodes_set:
@@ -247,7 +255,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         for j in vessels_set:
             obj = obj + self.inst['reward'][j] * gp.quicksum(
-                var_dict[f"x_{i}_{k}_{j}_{l}"] for i in nodes_set for k in Time_set for l in Time_set  if l > k)
+                var_dict[f"x_{i}_{k}_{j}_{l}"] for i in nodes_set for k in Time_set for l in Time_set if l > k)
 
 
         # 目标函数 最大化 obj
@@ -271,16 +279,15 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         for u in bases_set:
             for k in Time_set:
-                if k - 1 >= 0:
-                    model.addConstr(
-                        gp.quicksum(var_dict[f"x_{u}_{k}_{j}_{l}"] for j in nodes_set for l in Time_set if l > k)
-                        - gp.quicksum(var_dict[f"x_{j}_{l}_{u}_{k}"] for j in nodes_set for l in Time_set if k > l)
-                        == var_dict[f"b_{u}_{k-1}"] - var_dict[f"b_{u}_{k}"], name='constraint_bases_%s_%s' % (u, k))
+                model.addConstr(
+                    gp.quicksum(var_dict[f"x_{u}_{k}_{j}_{l}"] for j in nodes_set for l in Time_set if l > k)
+                    - gp.quicksum(var_dict[f"x_{j}_{l}_{u}_{k}"] for j in nodes_set for l in Time_set if k > l)
+                    == var_dict[f"b_{u}_{k-1}"] - var_dict[f"b_{u}_{k}"], name='constraint_bases_%s_%s' % (u, k))
 
 
         for u in bases_set:
             model.addConstr(
-                var_dict[f"b_{u}_{0}"] == self.inst['drone_each_base'], name='constraint_initial_bases_%s' % (u))
+                var_dict[f"b_{u}_{-1}"] == self.inst['drone_each_base'], name='constraint_initial_bases_%s' % (u))
 
 
 
@@ -291,11 +298,10 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                     == gp.quicksum(var_dict[f"x_{j}_{l}_{v}_{k}"] for j in nodes_set for l in Time_set if k > l),
                     name='constraint_flow_balance_%s_%s' % (v, k))
 
-        for v in nodes_set:
+        for i in nodes_set:
             model.addConstr(
-                gp.quicksum(var_dict[f"x_{v}_{k}_{j}_{l}"] for k in Time_set for j in nodes_set
-                            for l in Time_set if l > k) <= 1,
-                name='constraint_visit_most_once_%s' % (v))
+                gp.quicksum(var_dict[f"x_{i}_{k}_{j}_{l}"] for k in Time_set for j in nodes_set for l in Time_set
+                            if l > k) <= 1, name='constraint_visit_most_once_%s' % (i))
 
         for v in vessels_set:
             for k in Time_set:
