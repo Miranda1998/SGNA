@@ -65,8 +65,6 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # drones num for each location
         all_time = [-1] + Time_set
-        print("Time_set", Time_set)
-        print('alltime', all_time)
         for s in scenario_set:
             for u in bases_set:
                 for t in all_time:

@@ -224,7 +224,7 @@ if __name__ == '__main__':
     #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_INSTANCE
     #   - Generate datasets: 
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --as_dat 1
-    #       python -m nsp.scripts.run_dm --problem dblrp_5_10 --mode GEN_DATASET_P --n_procs -1
+    #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_P --n_procs -1
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --run_dg_e 1 --as_dat 1
     #   - Train Models: 
     #       python runner.py --problems dblrp_10_10 --train_lr 1 --train_nn_p 1 --train_nn_e 1 --as_dat 1
