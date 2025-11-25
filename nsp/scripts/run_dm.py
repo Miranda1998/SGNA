@@ -10,7 +10,6 @@ def main(args):
     if args.do == Modes.GEN_INSTANCE.value or args.mode == Modes.GEN_INSTANCE.name:
         data_manager.generate_instance()
     elif args.do == Modes.GEN_DATASET_P.value or args.mode == Modes.GEN_DATASET_P.name:
-
         data_manager.generate_dataset_per_scenario(args.n_procs)
     elif args.do == Modes.GEN_DATASET_E.value or args.mode == Modes.GEN_DATASET_E.name:
         print("2222")

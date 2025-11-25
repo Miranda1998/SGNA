@@ -195,10 +195,19 @@ class DroneBaseLocationRoutingDataManager(DataManager):
                     y_subopt = self._get_pure_random_x(prob=p, size=self.instance['n_bases'])
                     procs_to_run.append((np.array(scenario), y_subopt))
 
+            # Initialize the progress bar for the total number of tasks
+            total_tasks = len(procs_to_run)
+            progress_bar = tqdm(total=total_tasks, desc="Processing scenarios", unit="task")
+
             if n_procs == -1:
                 pool = Pool()
             else:
                 pool = Pool(n_procs)
+
+            # Create a function to update the progress bar after each task
+            def update_progress(result):
+                progress_bar.update(1)
+
             for scenario, y_subopt in procs_to_run:
 
                 pool.apply_async(self.solve_second_stage_subopt_mp,
@@ -207,10 +216,14 @@ class DroneBaseLocationRoutingDataManager(DataManager):
                                      y_subopt,
                                      two_sp,
                                      self.instance,
-                                     mp_data_list))
+                                     mp_data_list),
+                                 callback=update_progress)
 
             pool.close()
             pool.join()
+
+            # Close the progress bar
+            progress_bar.close()
 
             data = list(mp_data_list)
 
@@ -250,7 +263,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
             time_ = time.time() - time_
 
             mp_data_list.append({
-                "demands": scenario,
+                "traj": scenario,
                 "y": y_subopt,
                 "obj": x_subopt_obj,
                 "features": x_subopt_features,
@@ -410,10 +423,11 @@ class DroneBaseLocationRoutingDataManager(DataManager):
 
         return y_sol
 
-    def _get_feature_vector(self, x_sol, demand):
+    def _get_feature_vector(self, x_sol, traj):
         """ Gets the simple feature vector (x, deamnds). """
         x_vect = self._sol_dict_to_vect(x_sol)
-        features = x_vect.tolist() + demand.tolist()
+        traj = np.array(traj).flatten()
+        features = x_vect.tolist() + traj.tolist()
         return features
 
     def _sol_dict_to_vect(self, x_sol):
