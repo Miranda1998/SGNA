@@ -1,1 +1,1 @@
-1 python -m nsp.scripts.train_model --problem dblrp_10_10 --model nn_p --hidden_dims 64 --lr 0.00768 --dropout 0.07346 --optimizer RMSprop --batch_size 32 --loss_fn MSELoss --wt_lasso 0.0 --wt_ridge 0.0 --log_freq 10 --n_epochs 1000 --use_wandb 0 
+1 python -m nsp.scripts.train_model --problem cflp_10_10 --model nn_p --hidden_dims 64 --lr 0.00768 --dropout 0.07346 --optimizer RMSprop --batch_size 32 --loss_fn MSELoss --wt_lasso 0.0 --wt_ridge 0.0 --log_freq 10 --n_epochs 1000 --use_wandb 0 

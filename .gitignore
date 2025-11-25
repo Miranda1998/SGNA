@@ -1,0 +1,22 @@
+# added exclusions
+*.pickle
+*.pkl
+*.lp
+*.pt
+*.mps
+*.cor
+*.smps
+*.tim
+*.sto
+table.dat
+dat_files/
+wandb/
+local_files/
+node_files/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+

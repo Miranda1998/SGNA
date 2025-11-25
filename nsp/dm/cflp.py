@@ -352,7 +352,6 @@ class FacilityLocationDataManager(DataManager):
         inst['time_limit'] = cfg.time_limit
         inst['mip_gap'] = cfg.mip_gap
         inst['verbose'] = cfg.verbose
-        inst['base_pos'] = cfg.base_pos
 
     @staticmethod
     def _generate_first_stage_data(cfg, inst, rng):

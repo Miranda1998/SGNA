@@ -28,6 +28,8 @@ class ReLUNetworkPerScenario(nn.Module):
             self.layers["layer_0"] = nn.Linear(self.input_dim, self.output_dim)
 
         else:  # build layers from list
+            print("Building NN with hidden dims: ", self.hidden_dims)
+            print("Input dim: ", self.input_dim)
             self.layers["layer_in"] = nn.Linear(self.input_dim, self.hidden_dims[0])
             self.layers["activation_in"] = nn.ReLU()
             if self.dropout:
