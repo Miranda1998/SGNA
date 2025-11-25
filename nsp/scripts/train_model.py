@@ -25,6 +25,11 @@ def factory_scenario_padder(args, split, max_scenarios):
         p = torch.nn.ZeroPad2d(pd)
         return p(t)
 
+    def pad_scenario_dbrlp(t, n_scenarios):
+        pd = (0, 0, 0, n_scenarios - t.shape[0])
+        p = torch.nn.ZeroPad2d(pd)
+        return p(t)
+
     def pad_scenario_pp(scenario, n_scenarios):
         padded_scenarios = np.asarray(scenario)
         padded_scenarios = np.vstack((padded_scenarios,
@@ -35,16 +40,21 @@ def factory_scenario_padder(args, split, max_scenarios):
     if 'cflp' in args.problem:
         max_n_scenarios = max(list(map(lambda x: len((x['demands'])), split)))
         x_scen = list(map(lambda x: np.array(x['demands']), split))
+        print('x_scen[0][demands]:', x_scen[0].shape)
+        print('x_scen[0][demands]:', x_scen[0])
         x_scen = list(map(lambda x: torch.from_numpy(x).float(), x_scen))
         x_scen = list(map(lambda x: pad_scenario_cflp_sslp(x, max_n_scenarios), x_scen))
         x_scen = torch.stack(x_scen).numpy()
         x_n_scen = np.array(list(map(lambda x: len(x['demands']), split))).reshape(-1, 1)
 
     elif 'dblrp' in args.problem:
+        max_n_scenarios = max(list(map(lambda x: len((x['scenarios'])), split)))
         x_scen = list(map(lambda x: np.array(x['scenarios']), split))
-        x_scen = list(map(lambda x: pad_scenario_ip(x), x_scen))
-        x_n_scen = np.array(list(map(lambda x: x[1], x_scen))).reshape(-1, 1)
-        x_scen = np.array(list(map(lambda x: x[0], x_scen)))
+        print('x_scen[0][demands]:', x_scen[0].shape)
+        x_scen = list(map(lambda x: torch.from_numpy(x).float(), x_scen))
+        x_scen = list(map(lambda x: pad_scenario_dbrlp(x, max_n_scenarios), x_scen))
+        x_scen = torch.stack(x_scen).numpy()
+        x_n_scen = np.array(list(map(lambda x: len(x['scenarios']), split))).reshape(-1, 1)
 
     return x_scen, x_n_scen
 
@@ -56,6 +66,10 @@ def load_split_expected(args, split, n_scenarios):
     x_fs = None
     if 'cflp' in args.problem:
         x_fs = np.array(list(map(lambda x: np.array(list(x['x'].values())), split)))
+
+    if 'dblrp' in args.problem:
+        x_fs = np.array(list(map(lambda x: np.array(list(x['x'].values())), split)))
+
     x_scen, x_n_scen = factory_scenario_padder(args, split, n_scenarios)
     y = np.array(list(map(lambda x: x['obj_mean'], split))).reshape(-1, 1)
 

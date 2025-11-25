@@ -366,12 +366,13 @@ class DroneBaseLocationRoutingDataManager(DataManager):
             for first_stage_sol, scenario_subset in procs_to_run:
                 objs, scens, times = [], [], []
                 for scenario in scenario_subset:
+                    flattened_scenario = scenario.flatten()
                     # add items to subset if and only if no errors occurred
                     scenario_hash = hash_expected(first_stage_sol, scenario, scenario_subset)
                     if scenario_hash in mp_cost_dict:
                         objs.append(mp_cost_dict[scenario_hash])
                         times.append(mp_time_dict[scenario_hash])
-                        scens.append(scenario)
+                        scens.append(flattened_scenario)
 
                 data.append({
                     "x": first_stage_sol,

@@ -508,15 +508,9 @@ class ReLUNetworkExpectedModel(Model):
         if 'cflp' in self.problem:
             fs_dim = self.instance['n_facilities']
             ss_dim = self.instance['n_customers']
-        elif 'ip' in self.problem:
-            fs_dim = 2
-            ss_dim = 2
-        elif 'sslp' in self.problem:
-            fs_dim = self.instance['n_locations']
-            ss_dim = self.instance['n_clients']
-        elif 'pp' in self.problem:
-            fs_dim = 16
-            ss_dim = 4
+        elif 'dblrp' in self.problem:
+            fs_dim = self.instance['n_bases']
+            ss_dim = self.instance['n_vessels']
 
         return fs_dim, ss_dim
 
