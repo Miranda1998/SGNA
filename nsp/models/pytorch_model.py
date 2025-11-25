@@ -233,12 +233,8 @@ class ReLUNetworkPerScenarioModel(Model):
         feature_dim = None
         if 'cflp' in self.problem:
             feature_dim = self.instance['n_facilities'] + self.instance['n_customers']
-        elif 'ip' in self.problem:
-            feature_dim = 4
-        elif 'sslp' in self.problem:
-            feature_dim = self.instance['n_locations'] + self.instance['n_clients']
-        elif 'pp' in self.problem:
-            feature_dim = 19
+        elif 'dblrp' in self.problem:
+            feature_dim = self.instance['n_bases'] + self.instance['n_vessels'] * self.instance['T'] * 2
 
         return feature_dim
 

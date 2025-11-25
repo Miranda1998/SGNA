@@ -377,7 +377,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
                     "x": first_stage_sol,
                     "obj_vals": objs,
                     "obj_mean": np.mean(objs),
-                    "demands": scens,
+                    "scenarios": scens,
                     "time": np.sum(times),
                     "times": times})
 
