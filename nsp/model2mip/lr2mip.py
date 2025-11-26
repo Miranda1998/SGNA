@@ -61,6 +61,9 @@ class LR2MIP(object):
         Q_var = self.gp_model.addVar(vtype=gp.GRB.CONTINUOUS, lb=-gp.GRB.INFINITY, name=v_name)
 
         _eq = 0
+        print('wt shape:', wt.shape)
+        print('scenario_len:', len(scenario))
+
         for i in range(wt.shape[0]):
             if i < nVar:
                 _eq += wt[i] * self.gp_vars[i]

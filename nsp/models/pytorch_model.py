@@ -510,7 +510,7 @@ class ReLUNetworkExpectedModel(Model):
             ss_dim = self.instance['n_customers']
         elif 'dblrp' in self.problem:
             fs_dim = self.instance['n_bases']
-            ss_dim = self.instance['n_vessels']
+            ss_dim = self.instance['n_vessels'] * self.instance['T'] * 2
 
         return fs_dim, ss_dim
 

@@ -1,1 +1,1 @@
-1 python -m nsp.scripts.train_model --problem dblrp_10_10 --model nn_e --embed_hidden_dim 512 --embed_dim1 64 --embed_dim2 16 --relu_hidden_dim 512 --agg_type mean --lr 0.00436 --dropout 0.04226 --optimizer Adam --batch_size 128 --loss_fn MSELoss --wt_lasso 0.09067 --wt_ridge 0.02603 --log_freq 10 --n_epochs 2000 --use_wandb 0 
+1 python -m nsp.scripts.train_model --problem cflp_10_10 --model lr 

@@ -21,22 +21,25 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
     def get_master_mip(self):
         """Initialize MIP model with first-stage variables and constraints """
         mip = gp.Model('mipQ')
-        x_in = mip.addVars(self.inst['n_facilities'], vtype=gp.GRB.BINARY, name='x_in')
+        x_in = mip.addVars(self.inst['n_bases'], vtype=gp.GRB.BINARY, name='x_in')
         mip.update()
+
+        bases_set = [f'u{i}' for i in range(self.inst['n_bases'])]
 
         # set objective
         objective = 0
         for i in x_in.keys():
-            objective += self.inst['fixed_costs'][i] * x_in[i]
-        mip.setObjective(objective, gp.GRB.MINIMIZE)
+            objective += -self.inst['base_costs'][bases_set[i]] * x_in[i]
+
+        mip.setObjective(objective, gp.GRB.MAXIMIZE)
         mip.update()
 
         return mip
 
     def get_scenario_embedding(self, n_scenarios, test_set):
         """ Gets the set of scenarios.  """
-        scenario_embedding = self.two_sp.get_scenarios(n_scenarios, test_set)
-
+        scenario_embedding_nonflatten = self.two_sp.get_scenarios(n_scenarios, test_set)
+        scenario_embedding = scenario_embedding_nonflatten.flatten()
         # Get embedding if NN-E model.
         if self.model_type == 'nn_e':
             x_scen = np.array(scenario_embedding)
@@ -108,4 +111,4 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
 
     def get_first_stage_variables(self, mip):
         return {k: mip.getVarByName(f'x_in[{k}]')
-                for k in range(self.inst['n_facilities'])}
+                for k in range(self.inst['n_bases'])}
