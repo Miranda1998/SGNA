@@ -511,7 +511,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
         # 初始化模型
-        model = CVAE(x_dim=5, y_dim=2, z_dim=32, hid_dim=128, horizon=72).to(device)
+        model = CVAE(x_dim=5, y_dim=2, z_dim=32, hid_dim=128, horizon=self.inst['T']).to(device)
 
         # 加载训练好的模型参数
         model.load_state_dict(torch.load(self.inst['cVAE_model_path'], map_location=device))

@@ -33,3 +33,108 @@ Optimal solution found (tolerance 1.00e-04)
 Best objective -4.685895005913e+03, best bound -4.685895005913e+03, gap 0.0000%
 
 User-callback calls 143, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Wed Nov 26 10:12:36 2025
+
+Set parameter LogFile to value "data\cflp\grb_log_lr_s100_ts0_f10_c10_r2.0_iss1_bt1_nsp10_nse5_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 100 rows, 110 columns and 1100 nonzeros
+Model fingerprint: 0x521e5e62
+Variable types: 100 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+03]
+  Objective range  [1e-02, 1e+03]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e+02, 3e+04]
+Presolve removed 100 rows and 110 columns
+Presolve time: 0.01s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.01 seconds (0.00 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -4685.9 -4685.9 
+No other solutions better than -4685.9
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective -4.685895005913e+03, best bound -4.685895005913e+03, gap 0.0000%
+
+User-callback calls 143, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Wed Nov 26 10:31:50 2025
+
+Set parameter LogFile to value "data\cflp\grb_log_lr_s100_ts0_f10_c10_r2.0_iss1_bt1_nsp10_nse5_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 100 rows, 110 columns and 1100 nonzeros
+Model fingerprint: 0x521e5e62
+Variable types: 100 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+03]
+  Objective range  [1e-02, 1e+03]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e+02, 3e+04]
+Presolve removed 100 rows and 110 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -4685.9 -4685.9 
+No other solutions better than -4685.9
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective -4.685895005913e+03, best bound -4.685895005913e+03, gap 0.0000%
+
+User-callback calls 143, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Wed Nov 26 10:33:46 2025
+
+Set parameter LogFile to value "data\cflp\grb_log_lr_s100_ts0_f10_c10_r2.0_iss1_bt1_nsp10_nse5_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 100 rows, 110 columns and 1100 nonzeros
+Model fingerprint: 0x521e5e62
+Variable types: 100 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+03]
+  Objective range  [1e-02, 1e+03]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e+02, 3e+04]
+Presolve removed 100 rows and 110 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -4685.9 -4685.9 
+No other solutions better than -4685.9
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective -4.685895005913e+03, best bound -4.685895005913e+03, gap 0.0000%
+
+User-callback calls 143, time in user-callback 0.00 sec

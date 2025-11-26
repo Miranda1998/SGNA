@@ -36,7 +36,9 @@ class FacilityLocationProblemApproximator(Approximator):
     def get_scenario_embedding(self, n_scenarios, test_set):
         """ Gets the set of scenarios.  """
         scenario_embedding = self.two_sp.get_scenarios(n_scenarios, test_set)
-
+        print('scenario_embedding shape11:', np.array(scenario_embedding).shape)
+        # scenario_embedding = np.array(scenario_embedding).flatten()
+        # print('scenario_embedding shape22:', np.array(scenario_embedding).shape)
         # Get embedding if NN-E model.
         if self.model_type == 'nn_e':
             x_scen = np.array(scenario_embedding)
