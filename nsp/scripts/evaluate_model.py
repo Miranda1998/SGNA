@@ -17,7 +17,7 @@ def load_learning_model(args, cfg):
     """ Loads trained model """
     if "nn" in args.model_type:  # pytorch model
         model_fp = get_path(cfg.data_path, cfg, ptype=args.model_type, suffix=".pt")
-        model = torch.load(model_fp, map_location=torch.device('cpu'))
+        model = torch.load(model_fp, map_location=torch.device('cpu'), weights_only=False)
     else:  # scikit-learn model
         model_fp = get_path(cfg.data_path, cfg, ptype=args.model_type, suffix=".pkl")
         with open(model_fp, 'rb') as p:

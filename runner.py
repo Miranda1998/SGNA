@@ -80,7 +80,7 @@ def get_scenario_and_test_sets(problem):
         scenarios = [100, 300, 500]
         test_sets = list(range(0, 1))
     elif problem == 'dblrp_10_10':
-        scenarios = [100, 200, 300]
+        scenarios = [20, 50, 100]
         test_sets = list(range(0, 1))
 
 
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     parser.add_argument('--problems', type=str, nargs='+', default=['cflp_10_10'], help='The problem(s) to run.')
     parser.add_argument('--data_dir', type=str, default='./data/',
          help = 'The data directory.  This should be left as the default unless otherwise required.')
-    parser.add_argument('--n_cpus', type=int, default=1,
+    parser.add_argument('--n_cpus', type=int, default=-1,
          help = 'Number of CPUs/threads to use.  This is only used in data generation and evaluating first-stage solutions.')
 
     # run all commands (this overrides all below arguments)

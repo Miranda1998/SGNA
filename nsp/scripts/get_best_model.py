@@ -22,7 +22,7 @@ def get_best_model(args):
                         suffix=model_suffix)
 
     # Find best result
-    best_criterion, best_results_path = np.infty, None
+    best_criterion, best_results_path = np.inf, None
     results_paths = [x for x in model_fp.parent.iterdir()
                      if results_fp_prefix in str(x.stem)]
     print(f'Checking {len(results_paths)} model files...')

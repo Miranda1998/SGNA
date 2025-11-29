@@ -128,7 +128,7 @@ class ReLUNetworkPerScenarioModel(Model):
 
         tr_results = {'loss': [], 'mse': [], 'mae': [], 'mape': []}
         val_results = {'mse': [], 'mae': [], 'mape': []}
-        best_results = {'mae': np.infty}
+        best_results = {'mae': np.inf}
 
         _time = time.time()
         for epoch in range(self.n_epochs):
@@ -387,7 +387,7 @@ class ReLUNetworkExpectedModel(Model):
 
         tr_results = {'loss': [], 'mse': [], 'mae': [], 'mape': []}
         val_results = {'mse': [], 'mae': [], 'mape': []}
-        best_results = {'mae': np.infty}
+        best_results = {'mae': np.inf}
 
         _time = time.time()
         for epoch in range(self.n_epochs):
