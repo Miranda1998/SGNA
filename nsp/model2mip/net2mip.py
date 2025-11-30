@@ -65,6 +65,8 @@ class Net2MIPPerScenario(object):
                 W.append(param.cpu().detach().numpy())
             if 'bias' in name:
                 B.append(param.cpu().detach().numpy())
+        print('weights shapes:', [w.shape for w in W])
+        print('bias shapes:', [b.shape for b in B])
 
         XX = []
         for k, (wt, b) in enumerate(zip(W, B)):
@@ -88,6 +90,7 @@ class Net2MIPPerScenario(object):
                 # x in-by-1
                 # _eq = W . x
                 _eq = 0
+                print('inpSz:', inpSz)
                 for i in range(inpSz):
                     # First layer weights are partially multiplied by gp.var and features
                     if k == 0:
@@ -97,6 +100,8 @@ class Net2MIPPerScenario(object):
                         else:
                             _eq += wt[j][i] * scenario[i - nVar]
                     else:
+                        print('XX shape:', len(XX), len(XX[-1]))
+                        print('i', i)
                         _eq += wt[j][i] * XX[-1][i]
 
                 # Add bias

@@ -7,7 +7,7 @@
 # Optimal parameters for NN-P
 nn_p_params =  {
     'cflp_10_10': {
-        'hidden_dims': [64],
+        'hidden_dims': [64, 64],
         'lr': 0.00768,
         'dropout': 0.07346,
         'optimizer_type': 'RMSprop',

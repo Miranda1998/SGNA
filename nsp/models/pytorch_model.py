@@ -15,6 +15,8 @@ from .model import Model
 from .network import ReLUNetworkPerScenario
 from .network import ReLUNetworkExpected
 
+import matplotlib.pyplot as plt  # 引入绘图库
+
 
 class ReLUNetworkPerScenarioModel(Model):
     def __init__(self,
@@ -75,10 +77,11 @@ class ReLUNetworkPerScenarioModel(Model):
                                               'ridge': self.wt_ridge})  # Fixed for now
 
         feature_dim = self._get_feature_dim()
+
         self.model = ReLUNetworkPerScenario(
             feature_dim,
             self.hidden_dims,
-            self.dropout).get_net_as_sequential()
+            self.dropout)
         self.model.params = self.params
         self.model = self.model.cuda() if self.cuda_available else self.model
         self.optimizer = optimizer_cls(self.model.parameters(), lr=self.lr)
@@ -86,7 +89,7 @@ class ReLUNetworkPerScenarioModel(Model):
         self.model_clone = ReLUNetworkPerScenario(
             feature_dim,
             self.hidden_dims,
-            self.dropout).get_net_as_sequential()
+            self.dropout)
         self.model_clone = self.model_clone.cuda() if self.cuda_available else self.model_clone
         self.model_clone.eval()
 
@@ -125,6 +128,7 @@ class ReLUNetworkPerScenarioModel(Model):
     def train(self, data):
         self.data = data
         self.loader = self._get_dataloader()
+        # 启用交互模式
 
         tr_results = {'loss': [], 'mse': [], 'mae': [], 'mape': []}
         val_results = {'mse': [], 'mae': [], 'mape': []}
@@ -136,6 +140,13 @@ class ReLUNetworkPerScenarioModel(Model):
             tr_results['loss'].append(np.mean(ep_loss))
             if ((epoch + 1) % self.log_freq) == 0:
                 self._val_epoch(epoch, tr_results, val_results, best_results)
+
+            if (epoch + 1) % 200 == 0:
+                print(f"  Epoch {epoch+1}/{self.n_epochs} completed.")
+                # 绘制 MSE 下降曲线
+                self.plot_mse_curve(tr_results['mse'], title=f"Training MSE Curve up to Epoch {epoch+1}")
+                self.plot_mse_curve(val_results['mse'], title=f"Validation MSE Curve up to Epoch {epoch+1}")
+
         _time = time.time() - _time
 
         best_results['time'] = _time
@@ -191,6 +202,9 @@ class ReLUNetworkPerScenarioModel(Model):
         with torch.no_grad():
             tr_preds = self.model(self.tensors['x_tr']).detach().cpu().numpy()
             val_preds = self.model(self.tensors['x_val']).cpu().detach().numpy()
+            print('tr_preds shape:', tr_preds.shape)
+            print('self.tensors[y_tr]', self.tensors['y_tr'][:5])
+            print('tr_preds sample:', tr_preds[:5])
 
         tr_results['mse'].append(MSE(self.data['y_tr'], tr_preds))
         tr_results['mae'].append(MAE(self.data['y_tr'], tr_preds))
@@ -235,6 +249,7 @@ class ReLUNetworkPerScenarioModel(Model):
             feature_dim = self.instance['n_facilities'] + self.instance['n_customers']
         elif 'dblrp' in self.problem:
             feature_dim = self.instance['n_bases'] + self.instance['n_vessels'] * self.instance['T'] * 2
+            # feature_dim = 20
 
         return feature_dim
 
@@ -259,6 +274,22 @@ class ReLUNetworkPerScenarioModel(Model):
                   'val': DataLoader(dataset_val, batch_size=self.batch_size, shuffle=False)}
 
         return loader
+
+    def plot_mse_curve(self, mse_values, title):
+        """
+        绘制训练过程中 MSE 的变化曲线。
+        :param mse_values: 训练过程中每个 epoch 的 MSE 值列表
+        """
+        plt.figure(figsize=(10, 6))
+        plt.plot(range(len(mse_values)), mse_values, label='Train MSE')
+        plt.xlabel('Epochs')
+        plt.ylabel('MSE')
+        plt.title(title)
+        plt.legend()
+        plt.grid(True)
+        # 更新图像内容
+        plt.show()  # 更新图像
+
 
 
 class ReLUNetworkExpectedModel(Model):
@@ -395,6 +426,14 @@ class ReLUNetworkExpectedModel(Model):
             tr_results['loss'].append(np.mean(ep_loss))
             if ((epoch + 1) % self.log_freq) == 0:
                 self._val_epoch(epoch, tr_results, val_results, best_results)
+
+            if epoch % 200 == 0:
+                print(f"  Epoch {epoch+1}/{self.n_epochs} completed.")
+                # 绘制 MSE 下降曲线
+                self.plot_mse_curve(tr_results['mse'], title=f"Training MSE Curve up to Epoch {epoch+1}")
+                self.plot_mse_curve(val_results['mse'], title=f"Validation MSE Curve up to Epoch {epoch+1}")
+
+
         _time = time.time() - _time
 
         best_results['time'] = _time
@@ -556,3 +595,18 @@ class ReLUNetworkExpectedModel(Model):
                   'val': DataLoader(dataset_val, batch_size=self.batch_size, shuffle=False)}
 
         return loader
+
+    def plot_mse_curve(self, mse_values, title):
+        """
+        绘制训练过程中 MSE 的变化曲线。
+        :param mse_values: 训练过程中每个 epoch 的 MSE 值列表
+        """
+        plt.figure(figsize=(10, 6))
+        plt.plot(range(len(mse_values)), mse_values, label='Train MSE')
+        plt.xlabel('Epochs')
+        plt.ylabel('MSE')
+        plt.title(title)
+        plt.legend()
+        plt.grid(True)
+        # 更新图像内容
+        plt.show()  # 更新图像

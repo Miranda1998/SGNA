@@ -96,7 +96,6 @@ def load_data_expected(args, cfg, n_scenarios):
 def load_split_per_scenario(split):
 
     x_list = list(map(lambda x: x['features'], split))
-
     print("len x_list:", len(x_list))
 
     x = np.array(x_list)
@@ -186,11 +185,11 @@ if __name__ == '__main__':
     parser.add_argument('--loss_fn', type=str, default='MSELoss')
     parser.add_argument('--wt_lasso', type=float, default=0)
     parser.add_argument('--wt_ridge', type=float, default=0)
-    parser.add_argument('--log_freq', type=int, default=10, help='Frequency to evaluate model.')
+    parser.add_argument('--log_freq', type=int, default=5, help='Frequency to evaluate model.')
     parser.add_argument('--n_epochs', type=int, default=500, help='Number of training epochs.')
 
     # NN-P parameters
-    parser.add_argument('--hidden_dims', nargs="+", type=int, default=[64], help='List for hidden dimension.')
+    parser.add_argument('--hidden_dims', nargs="+", type=int, default=[128, 128], help='List for hidden dimension.')
 
     # NN-E parameters
     parser.add_argument('--agg_type', type=str, default="mean",

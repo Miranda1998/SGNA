@@ -20,38 +20,124 @@ class ReLUNetworkPerScenario(nn.Module):
         self.input_dim = feature_dim
         self.hidden_dims = hidden_dims
         self.output_dim = 1
-        self.dropout = dropout
+        # self.dropout = dropout
 
-        self.layers = collections.OrderedDict()
+        self.downsample_layer = nn.Linear(self.input_dim - 10, 10)
 
-        if len(self.hidden_dims) == 0:
-            self.layers["layer_0"] = nn.Linear(self.input_dim, self.output_dim)
+        self.layers = nn.Sequential()
 
-        else:  # build layers from list
-            print("Building NN with hidden dims: ", self.hidden_dims)
-            print("Input dim: ", self.input_dim)
-            self.layers["layer_in"] = nn.Linear(self.input_dim, self.hidden_dims[0])
-            self.layers["activation_in"] = nn.ReLU()
-            if self.dropout:
-                self.layers["dropout_in"] = nn.Dropout(self.dropout)
+        self.layers.append(nn.Linear(self.input_dim, self.hidden_dims[0]))
+        self.layers.append(nn.ReLU())
 
-            for i in range(len(self.hidden_dims) - 1):
-                self.layers[f"layer_{i}"] = nn.Linear(self.hidden_dims[i], self.hidden_dims[i + 1])
-                self.layers[f"activation_{i}"] = nn.ReLU()
-                if self.dropout:
-                    self.layers[f"dropout_{i}"] = nn.Dropout(self.dropout)
+        for i in range(len(self.hidden_dims) - 1):
+            self.layers.append(nn.Linear(self.hidden_dims[i], self.hidden_dims[i + 1]))
+            self.layers.append(nn.ReLU())
+            if dropout:
+                self.layers.append(nn.Dropout(dropout))
 
-            self.layers[f"layer_out"] = nn.Linear(self.hidden_dims[-1], self.output_dim)
+        self.layers.append(nn.Linear(self.hidden_dims[-1], self.output_dim))
+
+        # self.layers = collections.OrderedDict()
+        #
+        # if len(self.hidden_dims) == 0:
+        #     self.layers["layer_0"] = nn.Linear(self.input_dim, self.output_dim)
+        #
+        # else:  # build layers from list
+        #     print("Building NN with hidden dims: ", self.hidden_dims)
+        #     print("Input dim: ", self.input_dim)
+        #     self.layers["layer_in"] = nn.Linear(self.input_dim, self.hidden_dims[0])
+        #     self.layers["activation_in"] = nn.ReLU()
+        #     if self.dropout:
+        #         self.layers["dropout_in"] = nn.Dropout(self.dropout)
+        #
+        #     for i in range(len(self.hidden_dims) - 1):
+        #         self.layers[f"layer_{i}"] = nn.Linear(self.hidden_dims[i], self.hidden_dims[i + 1])
+        #         self.layers[f"activation_{i}"] = nn.ReLU()
+        #         if self.dropout:
+        #             self.layers[f"dropout_{i}"] = nn.Dropout(self.dropout)
+        #
+        #     self.layers[f"layer_out"] = nn.Linear(self.hidden_dims[-1], self.output_dim)
+        #
+        # self.layers = torch.nn.Sequential(self.layers)
 
     def forward(self, x):
         """ Forward pass. """
-        for layer in self.layers:
-            x = layer(x)
+        # print("x.shape", x.shape)
+        x2 = self.custom_min_max_normalize(x[:, 10:])  # 对后720维进行归一化
+        x = torch.cat((x[:, :10], x2), dim=-1)
+
+        # x2 = self.downsample_layer(x[:, 10:])
+        # x = torch.cat((x[:, :10], x2), dim=-1)
+
+        x = self.layers(x)
+
         return x
 
-    def get_net_as_sequential(self):
-        """ Returns nn.sequential object of model. """
-        return torch.nn.Sequential(self.layers)
+    def custom_min_max_normalize(self, x):
+        """
+        对x进行归一化，后720维按照指定的范围进行Min-Max归一化。
+        - 如果值在27到31之间，按照[27, 31]归一化
+        - 如果值在-96到-90之间，按照[-96, -90]归一化
+        """
+        # 定义归一化的范围
+        range_27_31 = (27, 31)
+        range_neg96_neg90 = (-96, -90)
+
+        # 创建一个新的 x，保持原有数据结构
+        normalized_x = x.clone()
+
+        # 计算 27 到 31 范围内的掩码
+        mask_27_31 = (x >= range_27_31[0]) & (x <= range_27_31[1])
+
+        # 计算 -96 到 -90 范围内的掩码
+        mask_neg96_neg90 = (x >= range_neg96_neg90[0]) & (x <= range_neg96_neg90[1])
+
+        # 对于在 27 到 31 范围内的值进行归一化
+        normalized_x[mask_27_31] = (x[mask_27_31] - range_27_31[0]) / (range_27_31[1] - range_27_31[0])
+
+        # 对于在 -96 到 -90 范围内的值进行归一化
+        normalized_x[mask_neg96_neg90] = (x[mask_neg96_neg90] - range_neg96_neg90[0]) / (
+                    range_neg96_neg90[1] - range_neg96_neg90[0])
+
+        # 对于不在这两个范围内的值，可以保持原值，或者你也可以选择其他方式处理
+        # normalized_x[~mask_27_31 & ~mask_neg96_neg90] = x[~mask_27_31 & ~mask_neg96_neg90]  # 保持原值
+
+        return normalized_x
+
+    # def custom_min_max_normalize(self, x):
+    #     """
+    #     对x进行归一化，后720维按照指定的范围进行Min-Max归一化。
+    #     - 如果值在27到31之间，按照[27, 31]归一化
+    #     - 如果值在-96到-90之间，按照[-96, -90]归一化
+    #     """
+    #     # 获取x的形状，假设x的shape是 (batch_size, 720)
+    #     batch_size, _ = x.shape
+    #
+    #     # 创建一个新的x，保持原有数据结构
+    #     normalized_x = x.clone()
+    #
+    #     # 定义归一化的范围
+    #     range_27_31 = (27, 31)
+    #     range_neg96_neg90 = (-96, -90)
+    #
+    #     # 归一化逻辑：针对后720维
+    #     for i in range(batch_size):
+    #         for j in range(720):  # 逐个遍历后720维
+    #             value = x[i, j]
+    #
+    #             if range_27_31[0] <= value <= range_27_31[1]:
+    #                 # 如果值在27到31之间，进行归一化
+    #                 normalized_x[i, j] = (value - range_27_31[0]) / (range_27_31[1] - range_27_31[0])
+    #             elif range_neg96_neg90[0] <= value <= range_neg96_neg90[1]:
+    #                 # 如果值在-96到-90之间，进行归一化
+    #                 normalized_x[i, j] = (value - range_neg96_neg90[0]) / (range_neg96_neg90[1] - range_neg96_neg90[0])
+    #             else:
+    #                 # 如果不在这两个范围内，可以选择不做任何变化或按其他规则处理
+    #                 # 这里选择不做处理，保持原值
+    #                 print('Value out of range:', value.item())
+    #                 normalized_x[i, j] = value
+    #
+    #     return normalized_x
 
 
 class ReLUNetworkExpected(nn.Module):
