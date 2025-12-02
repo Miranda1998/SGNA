@@ -33,3 +33,46 @@ Optimal solution found (tolerance 1.00e-04)
 Best objective 1.560710525513e+01, best bound 1.560710525513e+01, gap 0.0000%
 
 User-callback calls 263, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Tue Dec  2 16:37:12 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 15380 rows, 15390 columns and 84500 nonzeros
+Model fingerprint: 0x31686ccf
+Variable types: 10260 continuous, 5130 integer (5130 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [5e-05, 1e+05]
+Presolve removed 12841 rows and 13056 columns
+Presolve time: 0.37s
+Presolved: 2539 rows, 2334 columns, 15405 nonzeros
+Variable types: 1652 continuous, 682 integer (682 binary)
+Found heuristic solution: objective 4.7993340
+
+Root relaxation: objective 4.800227e+00, 3 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    4.80023    0    1    4.79933    4.80023  0.02%     -    0s
+
+Explored 1 nodes (3 simplex iterations) in 0.42 seconds (0.29 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 1: 4.79933 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.799333951496e+00, best bound 4.799333951496e+00, gap 0.0000%
+
+User-callback calls 511, time in user-callback 0.00 sec

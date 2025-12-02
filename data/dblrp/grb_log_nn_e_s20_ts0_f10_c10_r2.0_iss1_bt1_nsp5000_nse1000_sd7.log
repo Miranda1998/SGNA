@@ -45,3 +45,129 @@ Optimal solution found (tolerance 1.00e-04)
 Best objective 1.184582198332e+02, best bound 1.184582198332e+02, gap 0.0000%
 
 User-callback calls 478, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Tue Dec  2 16:48:41 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_e_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 1537 rows, 1547 columns and 8705 nonzeros
+Model fingerprint: 0xb285db2b
+Variable types: 1025 continuous, 522 integer (522 binary)
+Coefficient statistics:
+  Matrix range     [5e-08, 1e+05]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-04, 1e+05]
+Warning: Model contains large matrix coefficient range
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 1287 rows and 1290 columns
+Presolve time: 0.03s
+Presolved: 250 rows, 257 columns, 1480 nonzeros
+Variable types: 165 continuous, 92 integer (92 binary)
+Found heuristic solution: objective 0.4447994
+Found heuristic solution: objective 37.8808271
+
+Root relaxation: objective 1.462881e+02, 179 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  146.28814    0   46   37.88083  146.28814   286%     -    0s
+     0     0  146.13706    0   37   37.88083  146.13706   286%     -    0s
+H    0     0                      89.8282579  146.13706  62.7%     -    0s
+H    0     0                     119.5378640  146.13706  22.3%     -    0s
+     0     0          -    0       119.53786  119.54188  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 19
+  Implied bound: 7
+  Clique: 12
+  MIR: 15
+  StrongCG: 4
+  Flow cover: 41
+  RLT: 8
+  Relax-and-lift: 15
+  PSD: 1
+
+Explored 1 nodes (229 simplex iterations) in 0.08 seconds (0.03 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 4: 119.538 89.8283 37.8808 0.444799 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.195378639779e+02, best bound 1.195378639779e+02, gap 0.0000%
+
+User-callback calls 560, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Tue Dec  2 16:50:07 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_e_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 1537 rows, 1547 columns and 8705 nonzeros
+Model fingerprint: 0xb285db2b
+Variable types: 1025 continuous, 522 integer (522 binary)
+Coefficient statistics:
+  Matrix range     [5e-08, 1e+05]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-04, 1e+05]
+Warning: Model contains large matrix coefficient range
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 1287 rows and 1290 columns
+Presolve time: 0.01s
+Presolved: 250 rows, 257 columns, 1480 nonzeros
+Variable types: 165 continuous, 92 integer (92 binary)
+Found heuristic solution: objective 0.4447994
+Found heuristic solution: objective 37.8808271
+
+Root relaxation: objective 1.462881e+02, 179 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  146.28814    0   46   37.88083  146.28814   286%     -    0s
+     0     0  146.13706    0   37   37.88083  146.13706   286%     -    0s
+H    0     0                      89.8282579  146.13706  62.7%     -    0s
+H    0     0                     119.5378640  146.13706  22.3%     -    0s
+     0     0          -    0       119.53786  119.54188  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 19
+  Implied bound: 7
+  Clique: 12
+  MIR: 15
+  StrongCG: 4
+  Flow cover: 41
+  RLT: 8
+  Relax-and-lift: 15
+  PSD: 1
+
+Explored 1 nodes (229 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 4: 119.538 89.8283 37.8808 0.444799 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.195378639779e+02, best bound 1.195378639779e+02, gap 0.0000%
+
+User-callback calls 551, time in user-callback 0.00 sec

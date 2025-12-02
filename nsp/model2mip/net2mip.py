@@ -72,13 +72,13 @@ class Net2MIPPerScenario(object):
         for k, (wt, b) in enumerate(zip(W, B)):
 
             outSz, inpSz = wt.shape
+            # print('Layer', k, 'outSz:', outSz, 'inpSz:', inpSz)
 
             X, S, Z = [], [], []
             for j in range(outSz):
                 x_name = f'x_{self.scenario_index}_{k + 1}_{j}'
                 s_name = f's_{self.scenario_index}_{k + 1}_{j}'
                 z_name = f'z_{self.scenario_index}_{k + 1}_{j}'
-
                 if k < len(W) - 1:
                     X.append(self.gp_model.addVar(vtype=gp.GRB.CONTINUOUS, lb=0, name=x_name))
                     S.append(self.gp_model.addVar(vtype=gp.GRB.CONTINUOUS, lb=0, name=s_name))
@@ -90,18 +90,20 @@ class Net2MIPPerScenario(object):
                 # x in-by-1
                 # _eq = W . x
                 _eq = 0
-                print('inpSz:', inpSz)
                 for i in range(inpSz):
                     # First layer weights are partially multiplied by gp.var and features
-                    if k == 0:
+                    # print('XX shape1:', len(XX))
+                    # if len(XX) > 0:
+                    #     print('XX[-1] shape1:', len(XX[-1]))
+                    # print('k_i_j', k, i, j)
+                    # if k == 0:
+                    if k < len(W) - 1:
                         # Multiply gp vars
                         if i < nVar:
                             _eq += wt[j][i] * self.gp_vars[i]
                         else:
                             _eq += wt[j][i] * scenario[i - nVar]
                     else:
-                        print('XX shape:', len(XX), len(XX[-1]))
-                        print('i', i)
                         _eq += wt[j][i] * XX[-1][i]
 
                 # Add bias
@@ -118,6 +120,12 @@ class Net2MIPPerScenario(object):
 
                 # Save current layers gurobi vars
                 XX.append(X)
+            #     print('X.shape2', len(X))
+            #     print('XX shape2:', len(XX))
+            #     if len(XX) > 0:
+            #         print('XX[-1] shape2:', len(XX[-1]))
+            #
+            # print('Finished layer', k)
 
         self.gp_model.update()
         Q_var = XX[-1][-1]

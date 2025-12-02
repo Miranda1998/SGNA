@@ -32,61 +32,6 @@ def hash_expected(sol, scenario, scenario_subset):
     return frozenset(sol.items()), tuple(hashed_scenario_subset), tuple(scenario_flattened)
 
 
-# def convert_to_hashable(obj, path=""):
-#     """
-#     Recursively converts an object into a hashable type (e.g., tuple, frozenset).
-#     Converts numpy arrays, lists, dicts, and other iterable objects into tuple/frozenset.
-#
-#     :param obj: The object to convert.
-#     :param path: The path for debugging and recursion tracing.
-#     :return: A hashable version of the object.
-#     """
-#     # Handle numpy.ndarray objects: convert them into tuples
-#     if isinstance(obj, np.ndarray):
-#         return tuple(obj.flatten())  # Convert numpy.ndarray to a flat tuple
-#
-#     # Handle lists: recursively convert each element to a hashable type (tuple)
-#     elif isinstance(obj, list):
-#         return tuple(convert_to_hashable(x, path + "->list") for x in obj)  # Recursively convert list elements
-#
-#     # Handle dicts: recursively convert both keys and values to hashable types
-#     elif isinstance(obj, dict):
-#         return frozenset(
-#             (convert_to_hashable(key, path + "->dict->key"), convert_to_hashable(value, path + "->dict->value"))
-#             for key, value in obj.items())  # Convert both key and value to hashable
-#
-#     # Handle sets: sets can be converted to frozensets
-#     elif isinstance(obj, set):
-#         return frozenset(convert_to_hashable(x, path + "->set") for x in obj)  # Convert each element of set
-#
-#     # If it's any other object type, we assume it's already hashable and return it
-#     else:
-#         return obj
-#
-#
-# def hash_expected(sol, scenario, scenario_subset):
-#     """
-#     Generate a hashable scenario hash based on the provided solution, scenario, and scenario_subset.
-#     This function ensures all elements in sol, scenario, and scenario_subset are converted to hashable types.
-#
-#     :param sol: A dictionary containing solution information.
-#     :param scenario: A list or other object that will be converted into a tuple.
-#     :param scenario_subset: A list of scenarios to be converted into hashable forms.
-#     :return: A tuple containing three hashable components.
-#     """
-#     # Convert all items in 'sol' to hashable types (keys and values)
-#     sol_items = [(key, convert_to_hashable(value, "sol->" + str(key))) for key, value in sol.items()]
-#
-#     # Convert all items in 'scenario_subset' to hashable types
-#     hashed_scenario_subset = [convert_to_hashable(x, "scenario_subset") for x in scenario_subset]
-#
-#     # Convert 'scenario' to hashable type
-#     scenario_hashable = convert_to_hashable(scenario, "scenario")
-#
-#     # Return the final hashable representation (frozenset for sol items, tuples for other components)
-#     return frozenset(sol_items), tuple(hashed_scenario_subset), scenario_hashable
-
-
 class DroneBaseLocationRoutingDataManager(DataManager):
     def __init__(self, problem_config):
 

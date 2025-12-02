@@ -3,6 +3,8 @@ import pickle
 
 import numpy as np
 import torch
+import random
+import os
 
 import nsp.params as params
 from nsp.models import factory_learning_model
@@ -138,6 +140,20 @@ def main(args):
     print(f"TRAINING MODELS: problem = {args.problem}\n")
 
     torch.manual_seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
+
+    random.seed(args.seed)
+    np.random.seed(args.seed)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)  # 如果使用多GPU
+
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+    os.environ['PYTHONHASHSEED'] = str(args.seed)
 
     global get_path
     get_path = factory_get_path(args)

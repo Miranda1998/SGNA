@@ -41,7 +41,6 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
         scenario_embedding = self.two_sp.get_scenarios(n_scenarios, test_set)
         print('scenario_embedding shape11:', np.array(scenario_embedding).shape)
         scenario_embedding = [np.array(scenario_embedding[x]).flatten() for x in range(len(scenario_embedding))]
-        scenario_embedding = np.array(scenario_embedding)
         print('scenario_embedding shape22:', np.array(scenario_embedding).shape)
 
         # Get embedding if NN-E model.
@@ -50,6 +49,14 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
             x_scen = torch.from_numpy(x_scen).float()
             x_scen = torch.reshape(x_scen, (1, x_scen.shape[0], x_scen.shape[1]))
             scenario_embedding = self.model.embed_scenarios(x_scen).detach().numpy().reshape(-1)
+
+        # Normalize the scenario embedding
+        normalized_embedding = []
+        for scenario in scenario_embedding:
+            norm_scen = self.custom_min_max_normalize(scenario)
+            normalized_embedding.append(norm_scen)
+
+        scenario_embedding = np.array(normalized_embedding)
 
         return scenario_embedding
 
@@ -116,3 +123,40 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
     def get_first_stage_variables(self, mip):
         return {k: mip.getVarByName(f'x_in[{k}]')
                 for k in range(self.inst['n_bases'])}
+
+    def custom_min_max_normalize(self, x):
+        """
+        对x进行归一化，后720维按照指定的范围进行Min-Max归一化。
+        - 如果值在27到31之间，按照[27, 31]归一化
+        - 如果值在-96到-90之间，按照[-96, -90]归一化
+        """
+        # 如果 x 是 numpy array 或标量，转换为 tensor
+        if isinstance(x, np.ndarray):
+            x = torch.tensor(x, dtype=torch.float32)
+        elif isinstance(x, np.float32) or isinstance(x, float):  # 处理标量
+            x = torch.tensor(x, dtype=torch.float32)
+
+        # 定义归一化的范围
+        range_27_31 = (27, 31)
+        range_neg96_neg90 = (-96, -90)
+
+        # 创建一个新的 x，保持原有数据结构
+        normalized_x = x.clone()
+
+        # 计算 27 到 31 范围内的掩码
+        mask_27_31 = (x >= range_27_31[0]) & (x <= range_27_31[1])
+
+        # 计算 -96 到 -90 范围内的掩码
+        mask_neg96_neg90 = (x >= range_neg96_neg90[0]) & (x <= range_neg96_neg90[1])
+
+        # 对于在 27 到 31 范围内的值进行归一化
+        normalized_x[mask_27_31] = (x[mask_27_31] - range_27_31[0]) / (range_27_31[1] - range_27_31[0])
+
+        # 对于在 -96 到 -90 范围内的值进行归一化
+        normalized_x[mask_neg96_neg90] = (x[mask_neg96_neg90] - range_neg96_neg90[0]) / (
+                    range_neg96_neg90[1] - range_neg96_neg90[0])
+
+        # 对于不在这两个范围内的值，可以保持原值，或者你也可以选择其他方式处理
+        # normalized_x[~mask_27_31 & ~mask_neg96_neg90] = x[~mask_27_31 & ~mask_neg96_neg90]  # 保持原值
+
+        return normalized_x
