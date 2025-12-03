@@ -76,3 +76,111 @@ Optimal solution found (tolerance 1.00e-04)
 Best objective 4.799333951496e+00, best bound 4.799333951496e+00, gap 0.0000%
 
 User-callback calls 511, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 20:35:32 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 3860 rows, 3870 columns and 21780 nonzeros
+Model fingerprint: 0x0a159a55
+Variable types: 2580 continuous, 1290 integer (1290 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-03, 1e+05]
+Presolve removed 2705 rows and 2718 columns
+Presolve time: 0.03s
+Presolved: 1155 rows, 1152 columns, 6871 nonzeros
+Variable types: 766 continuous, 386 integer (386 binary)
+Found heuristic solution: objective 16.0409541
+
+Explored 0 nodes (0 simplex iterations) in 0.03 seconds (0.06 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 16.041 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.604095411532e+01, best bound 1.604095411532e+01, gap 0.0000%
+
+User-callback calls 471, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 20:55:42 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 15380 rows, 15390 columns and 84500 nonzeros
+Model fingerprint: 0xe12048d5
+Variable types: 10260 continuous, 5130 integer (5130 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-04, 1e+05]
+Presolve removed 12437 rows and 12640 columns
+Presolve time: 0.17s
+Presolved: 2943 rows, 2750 columns, 17655 nonzeros
+Variable types: 1930 continuous, 820 integer (820 binary)
+Found heuristic solution: objective 6.9824248
+
+Explored 0 nodes (0 simplex iterations) in 0.18 seconds (0.27 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 6.98242 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.982424766668e+00, best bound 6.982424766668e+00, gap 0.0000%
+
+User-callback calls 491, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 21:48:14 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 15380 rows, 15390 columns and 84500 nonzeros
+Model fingerprint: 0x5c5ccd34
+Variable types: 10260 continuous, 5130 integer (5130 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 12440 rows and 12644 columns
+Presolve time: 0.16s
+Presolved: 2940 rows, 2746 columns, 17492 nonzeros
+Variable types: 1930 continuous, 816 integer (816 binary)
+Found heuristic solution: objective 6.8639210
+
+Explored 0 nodes (0 simplex iterations) in 0.17 seconds (0.27 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 6.86392 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.863921035968e+00, best bound 6.863921035968e+00, gap 0.0000%
+
+User-callback calls 493, time in user-callback 0.00 sec

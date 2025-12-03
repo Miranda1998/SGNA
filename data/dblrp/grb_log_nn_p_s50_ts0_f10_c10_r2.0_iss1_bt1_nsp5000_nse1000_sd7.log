@@ -1,0 +1,72 @@
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 20:35:36 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s50_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 9650 rows, 9660 columns and 54450 nonzeros
+Model fingerprint: 0x451d0cf3
+Variable types: 6450 continuous, 3210 integer (3210 binary)
+Coefficient statistics:
+  Matrix range     [1e-04, 1e+05]
+  Objective range  [2e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 6726 rows and 6773 columns
+Presolve time: 0.10s
+Presolved: 2924 rows, 2887 columns, 17392 nonzeros
+Variable types: 1941 continuous, 946 integer (946 binary)
+Found heuristic solution: objective 16.0408464
+
+Explored 0 nodes (0 simplex iterations) in 0.11 seconds (0.18 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 16.0408 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.604084638722e+01, best bound 1.604084638722e+01, gap 0.0000%
+
+User-callback calls 483, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 21:48:39 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s50_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse1000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 38450 rows, 38460 columns and 211250 nonzeros
+Model fingerprint: 0xa0113d45
+Variable types: 25650 continuous, 12810 integer (12810 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [2e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-04, 1e+05]
+Presolve removed 31089 rows and 31616 columns
+Presolve time: 0.83s
+Presolved: 7361 rows, 6844 columns, 48008 nonzeros
+Variable types: 4830 continuous, 2014 integer (2014 binary)
+Found heuristic solution: objective 6.8984519
+
+Explored 0 nodes (0 simplex iterations) in 0.86 seconds (1.38 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 6.89845 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.898451866646e+00, best bound 6.898451866646e+00, gap 0.0000%
+
+User-callback calls 622, time in user-callback 0.00 sec
