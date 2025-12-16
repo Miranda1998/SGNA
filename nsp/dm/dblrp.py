@@ -352,11 +352,22 @@ class DroneBaseLocationRoutingDataManager(DataManager):
 
         pkl.dump(ml_data, open(self.ml_data_e_path, 'wb'))
 
-
     def _get_pure_random_x(self, prob, size):
-        """ Modeify bits in a solution x with probability p.  """
-        x_sub = self.rng.choice([0.0, 1.0], p=[prob, 1 - prob], size=size)
+        """ Modify bits in a solution x with exactly 3 bits set to 1. """
+
+        if size < 4:
+            raise ValueError("size must be at least 3 to have 3 bits set to 1.")
+
+        # Create an array of size 'size' filled with 0.0
+        x_sub = np.zeros(size)
+
+        # Randomly select 3 indices to set as 1.0
+        ones_indices = self.rng.choice(size, size=2, replace=False)
+        x_sub[ones_indices] = 1.0
+
+        # Convert the resulting array to a dictionary (assuming _sol_vect_to_dict is defined)
         y_sub_dict = self._sol_vect_to_dict(x_sub)
+
         return y_sub_dict
 
     def _sol_vect_to_dict(self, x_vect):

@@ -95,6 +95,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # 目标函数 最大化 obj
         model.setObjective(obj, gp.GRB.MAXIMIZE)
+
+        gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == 2  # 固定2个基站开放
+
         for s in scenario_set:
             for u in bases_set:
                 model.addConstr(
@@ -258,6 +261,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # 目标函数 最大化 obj
         model.setObjective(obj, gp.GRB.MAXIMIZE)
+
+        gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == 2  # 固定2个基站开放
 
 
         for u in bases_set:
