@@ -201,7 +201,6 @@ class FacilityLocationProblem(TwoStageStocProg):
         """ Gets the objective function value for a given solution. """
 
         scenarios = self.get_scenarios(n_scenarios, test_set)
-        n_scenarios = len(scenarios)
         scenario_prob = 1 / len(scenarios)
 
         # evaluate first stage values
@@ -213,7 +212,11 @@ class FacilityLocationProblem(TwoStageStocProg):
 
             mp_list = manager.list()
 
-            pool = Pool(n_procs)
+            if n_procs == -1:
+                pool = Pool()
+            else:
+                pool = Pool(n_procs)
+
             for demand in scenarios:
                 pool.apply_async(self.mp_get_second_stage_obj,
                                  args=(sol, demand, scenario_prob, gap, time_limit, verbose, mp_list))

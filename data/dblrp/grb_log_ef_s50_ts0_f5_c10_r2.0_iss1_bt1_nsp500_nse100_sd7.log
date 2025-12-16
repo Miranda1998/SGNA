@@ -1,0 +1,84 @@
+
+Gurobi 12.0.1 (win64) logging started Thu Dec  4 00:18:17 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s50_ts0_f5_c10_r2.0_iss1_bt1_nsp500_nse100_sd7.log"
+Set parameter NodefileStart to value 0.5
+Set parameter NodefileDir to value "node_files\s50_ts0"
+Set parameter MIPGap to value 0.0001
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 1
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  3600
+NodefileStart  0.5
+Threads  1
+
+Optimize a model with 21291000 rows, 7123755 columns and 58687500 nonzeros
+Model fingerprint: 0x01958129
+Variable types: 0 continuous, 7123755 integer (7087505 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+01]
+  Objective range  [2e-01, 1e+01]
+  Bounds range     [1e+00, 4e+01]
+  RHS range        [1e+00, 7e+01]
+Presolve removed 21119208 rows and 10500 columns (presolve time = 5s)...
+Presolve removed 21265146 rows and 7073503 columns
+Presolve time: 7.22s
+Presolved: 25854 rows, 50252 columns, 224068 nonzeros
+Variable types: 0 continuous, 50252 integer (38830 binary)
+Found heuristic solution: objective -50.0000000
+Found heuristic solution: objective -43.1005031
+Performing another presolve...
+Presolve removed 19569 rows and 26309 columns
+Presolve time: 0.58s
+Found heuristic solution: objective -42.0719195
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.7016473e+03   1.174133e+04   0.000000e+00     12s
+    4573    7.3715904e+01   0.000000e+00   0.000000e+00     12s
+
+Root relaxation: objective 7.371590e+01, 4573 iterations, 0.03 seconds (0.04 work units)
+Total elapsed time = 12.42s (DegenMoves)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   73.71590    0 1231  -42.07192   73.71590   275%     -   12s
+     0     0   72.20074    0  809  -42.07192   72.20074   272%     -   12s
+     0     0   70.06445    0  357  -42.07192   70.06445   267%     -   12s
+     0     0   70.06445    0  353  -42.07192   70.06445   267%     -   12s
+H    0     0                     -22.0719195   70.06445   417%     -   12s
+H    0     0                      57.1379171   70.06445  22.6%     -   13s
+H    0     0                      59.1700655   70.06445  18.4%     -   13s
+H    0     0                      61.3652399   70.06445  14.2%     -   13s
+H    0     0                      65.5755736   70.06445  6.85%     -   13s
+H    0     0                      65.6808721   70.06445  6.67%     -   14s
+H    0     0                      65.9072467   70.06445  6.31%     -   14s
+     0     0   67.69618    0  162   65.90725   67.69618  2.71%     -   14s
+     0     0   67.67767    0  138   65.90725   67.67767  2.69%     -   14s
+H    0     0                      66.2170584   67.67767  2.21%     -   14s
+     0     0   66.98725    0  114   66.21706   66.98725  1.16%     -   14s
+     0     0   66.90307    0  116   66.21706   66.90307  1.04%     -   14s
+     0     0   66.39586    0   28   66.21706   66.39586  0.27%     -   15s
+H    0     0                      66.2334732   66.39586  0.25%     -   15s
+     0     0   66.35652    0   11   66.23347   66.35652  0.19%     -   15s
+     0     0   66.35652    0   12   66.23347   66.35652  0.19%     -   15s
+     0     0   66.31306    0   15   66.23347   66.31306  0.12%     -   15s
+     0     0   66.31306    0   11   66.23347   66.31306  0.12%     -   15s
+     0     0     cutoff    0        66.23347   66.23347  0.00%     -   15s
+
+Explored 1 nodes (6175 simplex iterations) in 16.34 seconds (26.80 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 10: 66.2335 66.2335 66.2171 ... -22.0719
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.623347320889e+01, best bound 6.623347320889e+01, gap 0.0000%
+
+User-callback calls 2802, time in user-callback 3.41 sec

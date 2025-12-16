@@ -117,7 +117,7 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
         for var in model.getVars():
             if "x_in" in var.varName:
                 idx = int(var.varName.split('[')[-1][:-1])
-                x_sol[f"x_{idx}"] = np.abs(var.x)
+                x_sol[f"y_u{idx}"] = np.abs(var.x)
         return x_sol
 
     def get_first_stage_variables(self, mip):

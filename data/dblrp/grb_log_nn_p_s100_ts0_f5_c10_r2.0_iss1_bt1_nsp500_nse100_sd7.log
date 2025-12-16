@@ -1,0 +1,38 @@
+
+Gurobi 12.0.1 (win64) logging started Wed Dec  3 23:36:39 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s100_ts0_f5_c10_r2.0_iss1_bt1_nsp500_nse100_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  10800
+Threads  1
+
+Optimize a model with 76900 rows, 76905 columns and 294500 nonzeros
+Model fingerprint: 0x5ffc410b
+Variable types: 51300 continuous, 25605 integer (25605 binary)
+Coefficient statistics:
+  Matrix range     [2e-04, 1e+05]
+  Objective range  [1e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [5e-06, 1e+05]
+Presolve removed 66570 rows and 67316 columns
+Presolve time: 2.26s
+Presolved: 10330 rows, 9589 columns, 44474 nonzeros
+Variable types: 6781 continuous, 2808 integer (2808 binary)
+Found heuristic solution: objective 4.9021289
+
+Root relaxation: interrupted, 0 iterations, 0.00 seconds (0.00 work units)
+
+Explored 1 nodes (0 simplex iterations) in 2.33 seconds (3.43 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 4.90213 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.902128949351e+00, best bound 4.902128949941e+00, gap 0.0000%
+
+User-callback calls 855, time in user-callback 0.01 sec

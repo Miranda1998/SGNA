@@ -480,11 +480,42 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
     def evaluate_first_stage_sol(self, sol, n_scenarios, gap=0.0001, time_limit=600, threads=1, verbose=0,
                                  test_set="0", n_procs=1):
         """ Evaluates the first stage solution across all scenarios. """
+        scenarios = self.get_scenarios(n_scenarios, test_set)
+        n_scenarios = len(scenarios)
+        scenario_prob = 1 / len(scenarios)
 
-        return 1998
+        # evaluate first stage values
+        first_stage_obj_val = 0
+        print('self.inst[base_costs]', self.inst['base_costs'])
+        for i in range(self.n_bases):
+            first_stage_obj_val += -self.inst['base_costs'][f'u{i}'] * sol[f"y_u{i}"]
 
+        with Manager() as manager:
 
+            mp_list = manager.list()
 
+            if n_procs == -1:
+                pool = Pool()
+            else:
+                pool = Pool(n_procs)
+
+            for scenario in scenarios:
+                pool.apply_async(self.mp_get_second_stage_obj,
+                                 args=(sol, scenario, scenario_prob, gap, time_limit, verbose, mp_list))
+            pool.close()
+            pool.join()
+
+            second_stage_costs = list(mp_list)
+
+        second_stage_obj_val = np.sum(second_stage_costs)
+
+        return first_stage_obj_val + second_stage_obj_val
+
+    def mp_get_second_stage_obj(self, sol, scenario, scenario_prob, gap, time_limit, verbose, mp_list):
+        """ Multiprocessing """
+        second_stage_obj = scenario_prob * self.get_second_stage_objective(sol, scenario, gap=gap, time_limit=time_limit,
+                                                                           verbose=verbose)
+        mp_list.append(second_stage_obj)
 
     def  get_first_stage_solution(self, model):
         # 获取模型中的所有变量
