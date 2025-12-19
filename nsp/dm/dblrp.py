@@ -62,6 +62,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
         """ Stores generic problem information. """
         inst['n_vessels'] = cfg.n_vessels
         inst['n_bases'] = cfg.n_bases
+        inst['fixed_bases'] = cfg.fixed_bases
         inst['integer_second_stage'] = cfg.flag_integer_second_stage
         inst['bound_tightening_constrs'] = cfg.flag_bound_tightening
         inst['n_samples_p'] = cfg.n_samples_p
@@ -116,7 +117,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
         self._load_instances()
 
         print("Generating NN-P dataset for machine learning... ")
-        print(f"  PROBLEM: dblrp_{self.instance['n_bases']}_{self.instance['n_vessels']}")
+        print(f"  PROBLEM: dblrp_{self.instance['n_bases']}_{self.instance['n_vessels']}_fixed_bases_{self.instance['fixed_bases']}")
 
         data = []
         total_time = time.time()
@@ -137,7 +138,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
             for scenario in scenarios:
                 for j in range(self.instance['n_samples_per_scenario']):
                     p = self.rng.choice(probs)  # prob. of zero
-                    y_subopt = self._get_pure_random_x(prob=p, size=self.instance['n_bases'])
+                    y_subopt = self._get_pure_random_x(prob=p, size=self.instance['n_bases'], fixed_bases=self.instance['fixed_bases'])
                     procs_to_run.append((np.array(scenario), y_subopt))
 
             # Initialize the progress bar for the total number of tasks
@@ -352,18 +353,17 @@ class DroneBaseLocationRoutingDataManager(DataManager):
 
         pkl.dump(ml_data, open(self.ml_data_e_path, 'wb'))
 
-    def _get_pure_random_x(self, prob, size):
+    def _get_pure_random_x(self, prob, size, fixed_bases=-1):
         """ Modify bits in a solution x with exactly 3 bits set to 1. """
 
-        if size < 4:
-            raise ValueError("size must be at least 3 to have 3 bits set to 1.")
-
-        # Create an array of size 'size' filled with 0.0
-        x_sub = np.zeros(size)
-
-        # Randomly select 3 indices to set as 1.0
-        ones_indices = self.rng.choice(size, size=2, replace=False)
-        x_sub[ones_indices] = 1.0
+        # Randomly select n indices to set as 1.0
+        if fixed_bases != -1:
+            # Create an array of size 'size' filled with 0.0
+            x_sub = np.zeros(size)
+            ones_indices = self.rng.choice(size, size=fixed_bases, replace=False)
+            x_sub[ones_indices] = 1.0
+        else:
+            x_sub = self.rng.choice([0.0, 1.0], p=[prob, 1 - prob], size=size)
 
         # Convert the resulting array to a dictionary (assuming _sol_vect_to_dict is defined)
         y_sub_dict = self._sol_vect_to_dict(x_sub)

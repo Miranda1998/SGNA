@@ -202,9 +202,6 @@ class ReLUNetworkPerScenarioModel(Model):
         with torch.no_grad():
             tr_preds = self.model(self.tensors['x_tr']).detach().cpu().numpy()
             val_preds = self.model(self.tensors['x_val']).cpu().detach().numpy()
-            print('tr_preds shape:', tr_preds.shape)
-            print('self.tensors[y_tr]', self.tensors['y_tr'][:5])
-            print('tr_preds sample:', tr_preds[:5])
 
         tr_results['mse'].append(MSE(self.data['y_tr'], tr_preds))
         tr_results['mae'].append(MAE(self.data['y_tr'], tr_preds))

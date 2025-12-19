@@ -65,8 +65,6 @@ class Net2MIPPerScenario(object):
                 W.append(param.cpu().detach().numpy())
             if 'bias' in name:
                 B.append(param.cpu().detach().numpy())
-        print('weights shapes:', [w.shape for w in W])
-        print('bias shapes:', [b.shape for b in B])
 
         XX = []
         for k, (wt, b) in enumerate(zip(W, B)):

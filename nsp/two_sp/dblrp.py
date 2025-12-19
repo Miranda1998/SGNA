@@ -3,8 +3,11 @@ from multiprocessing import Manager, Pool
 import gurobipy as gp
 import numpy as np
 from geopy.distance import geodesic
+from nsp.utils.dblrp import haversine
 from .two_sp import TwoStageStocProg
 import pdb
+
+
 
 import torch
 from nsp.scenario_gen.model import CVAE  # 导入定义的cVAE模型
@@ -24,6 +27,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         self.n_vessels = self.inst['n_vessels']
         self.n_bases = self.inst['n_bases']
+        self.fixed_bases = self.inst['fixed_bases']
         self.n_drones = self.inst['n_drones']
         self.T = self.inst['T']  # time periods
 
@@ -81,9 +85,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                     var_dict[var_name] = model.addVar(vtype="I", lb=0, ub=self.inst['max_route_time'], name=var_name)
         print('Done1')
 
-        # obj = 0
         # 创建一个空的线性表达式对象
-        obj = gp.LinExpr
+
         obj = 0
         for u in bases_set:
             obj += - self.inst['base_costs'][u] * var_dict[f"y_{u}"]
@@ -96,7 +99,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         # 目标函数 最大化 obj
         model.setObjective(obj, gp.GRB.MAXIMIZE)
 
-        gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == 2  # 固定2个基站开放
+        if self.fixed_bases != -1:
+            model.addConstr(gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == self.fixed_bases, name='fixed_base_num')  # 固定2个基站开放
 
         for s in scenario_set:
             for u in bases_set:
@@ -193,7 +197,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                     coord2 = scenarios[s][int(j[1:])][l]  # 意大利，罗马的经纬度
 
                                 # 计算两个经纬度之间的地理距离
-                                distance = geodesic(coord1, coord2).kilometers  # (latitude, longitude)
+                                distance = haversine(coord1, coord2)  # (latitude, longitude)
 
                                 model.addConstr(
                                     (l - k - 1) * var_dict[f"x_{u}_{k}_{j}_{l}_{s}"] <=
@@ -249,7 +253,6 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # obj = 0
         # 创建一个空的线性表达式对象
-        obj = gp.LinExpr
         obj = 0
         for u in bases_set:
             obj += - self.inst['base_costs'][u] * var_dict[f"y_{u}"]
@@ -262,7 +265,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         # 目标函数 最大化 obj
         model.setObjective(obj, gp.GRB.MAXIMIZE)
 
-        gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == 2  # 固定2个基站开放
+        # if self.fixed_bases != -1:
+        #     model.addConstr(gp.quicksum(var_dict[f"y_{u}"] for u in bases_set) == 2, name='fixed_base_num') # 固定2个基站开放
 
 
         for u in bases_set:
@@ -349,6 +353,13 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
                             # 计算两个经纬度之间的地理距离
                             distance = geodesic(coord1, coord2).kilometers  # (latitude, longitude)
+                            dis1 = haversine(coord1, coord2)
+
+                            # print('distance111', distance)
+                            # print('dis1111', dis1)
+                            if distance - dis1 > 1:
+                                print('distan-dis', distance - dis1)
+
 
                             model.addConstr(
                                  (l - k - 1) * var_dict[f"x_{u}_{k}_{j}_{l}"] <=
@@ -408,14 +419,14 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         pass
 
 
-    def get_second_stage_objective(self, sol_1, traj, gap=0.0001, time_limit=1e7,
+    def get_second_stage_objective(self, sol_1, traj, gap=0.01, time_limit=1e7,
                                    threads=1, verbose=0):
         """ Solves the second stage problem for a given scenario. """
 
         model = self._make_second_stage_model(traj)
 
         # fix first stage solution
-        print("让我看看fixed的sol_1", sol_1)
+        # print("让我看看fixed的sol_1", sol_1)
         model = self.fix_first_stage(model, sol_1)
 
         model.setParam("OutputFlag", verbose)
@@ -426,7 +437,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         model.optimize()
 
         if model.Status == 2 or 9:
-            print("reward=", self.inst['reward'])
+            # print("reward=", self.inst['reward'])
             if model.Status == 2:
                 print('得到最优解')
                 print("MIPGap（相对误差）：%s\n" % model.MIPGap)
@@ -437,10 +448,10 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                 if v.x != 0 and v.x <= 1.0:
                     if "x" in v.var_name or "y" in v.var_name:
                         print('参数', v.varName, '=', v.x)
-            print("这里的第二阶段目标值就开始不对了吗", model.objVal)
+            # print("这里的第二阶段目标值就开始不对了吗", model.objVal)
 
         second_stage_obj = self.get_second_stage_cost(model)
-        print('second_stage_obj=', second_stage_obj)
+        # print('second_stage_obj(已加上第一阶段cost)=', second_stage_obj)
         return second_stage_obj
 
 
@@ -476,7 +487,6 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
             second_stage_obj = model.objVal + fist_stage_cost
 
-            print(f"Calculated second stage objective: {second_stage_obj}")
         else:
             print("Model optimization was not successful. Status:", model.status)
         return second_stage_obj
@@ -491,7 +501,6 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # evaluate first stage values
         first_stage_obj_val = 0
-        print('self.inst[base_costs]', self.inst['base_costs'])
         for i in range(self.n_bases):
             first_stage_obj_val += -self.inst['base_costs'][f'u{i}'] * sol[f"y_u{i}"]
 
@@ -512,9 +521,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
             second_stage_costs = list(mp_list)
 
-        second_stage_obj_val = np.sum(second_stage_costs)
+        second_stage_obj_val = np.sum(second_stage_costs) # 这里的第二阶段目标函数已包括了第一阶段的cost
 
-        return first_stage_obj_val + second_stage_obj_val
+        return second_stage_obj_val
 
     def mp_get_second_stage_obj(self, sol, scenario, scenario_prob, gap, time_limit, verbose, mp_list):
         """ Multiprocessing """
@@ -576,8 +585,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         scenarios = []
         for _ in range(n_scenarios):
             # 生成随机历史位置数据作为输入
-            trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K)
+            trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K, seed=_)
             hist_real = inverse_points_minmax(trajs, minmax_norm)[0].detach().cpu().numpy()
             scenarios.append(hist_real)
 
+        # print('first_scenario', scenarios[0])
         return scenarios

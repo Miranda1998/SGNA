@@ -1,5 +1,7 @@
 from pathlib import Path
 import torch
+import math
+
 
 def get_path(data_path, cfg, ptype="inst", suffix=".pkl", as_str=False):
     p = Path(data_path) / "dblrp"
@@ -32,3 +34,26 @@ def inverse_points_minmax(points_norm: torch.Tensor, minmax_norm: dict):
     lat = points_norm[..., 0] * lat_rng + lat_min
     lon = points_norm[..., 1] * lon_rng + lon_min
     return torch.stack([lat, lon], dim=-1)
+
+
+def haversine(coord1, coord2):
+    # 地球半径 (单位：千米)
+    R = 6371.0
+
+    lat1, lon1 = coord1
+    lat2, lon2 = coord2
+
+    # 将经纬度从度转为弧度
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+    # 计算经度和纬度的差值
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+
+    # 使用 haversine 公式计算两点之间的距离
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    # 计算距离
+    distance = R * c
+    return distance

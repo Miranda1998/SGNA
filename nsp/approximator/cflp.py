@@ -22,6 +22,7 @@ class FacilityLocationProblemApproximator(Approximator):
         """Initialize MIP model with first-stage variables and constraints """
         mip = gp.Model('mipQ')
         x_in = mip.addVars(self.inst['n_facilities'], vtype=gp.GRB.BINARY, name='x_in')
+
         mip.update()
 
         # set objective

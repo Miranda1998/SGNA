@@ -43,13 +43,14 @@ cflp_10_10 = SimpleNamespace(
 my_drone_each_base = 1
 dblrp_10_10 = SimpleNamespace(
     n_bases=10,
+    fixed_bases=2, # fixed_base = -1 代表不固定基站数量
     n_vessels=10,
     ratio=2.0,
     flag_integer_second_stage=True,
     flag_bound_tightening=True,
-    n_samples_p=2000,              # NN-P specific data generation
-    n_samples_per_scenario=20,      # NN-P specific data generation
-    n_samples_e=500,               # NN-E specific data generation
+    n_samples_p=200,              # NN-P specific data generation
+    n_samples_per_scenario=10,      # NN-P specific data generation
+    n_samples_e=50,               # NN-E specific data generation
     n_max_scenarios_in_tr=20,      # NN-E specific data generation
     time_limit=60,                  # data generation
     mip_gap=0.01,                   # data generation

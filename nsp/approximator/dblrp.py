@@ -22,6 +22,10 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
         """Initialize MIP model with first-stage variables and constraints """
         mip = gp.Model('mipQ')
         x_in = mip.addVars(self.inst['n_bases'], vtype=gp.GRB.BINARY, name='x_in')
+
+        # 添加约束，确保最多只有两个 x_in 等于 1
+        mip.addConstr(gp.quicksum(x_in[i] for i in x_in.keys()) == self.inst['fixed_bases'], "fixed_bases_x_in_equals_1")
+
         mip.update()
 
         bases_set = [f'u{i}' for i in range(self.inst['n_bases'])]
@@ -39,9 +43,7 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
     def get_scenario_embedding(self, n_scenarios, test_set):
         """ Gets the set of scenarios.  """
         scenario_embedding = self.two_sp.get_scenarios(n_scenarios, test_set)
-        print('scenario_embedding shape11:', np.array(scenario_embedding).shape)
         scenario_embedding = [np.array(scenario_embedding[x]).flatten() for x in range(len(scenario_embedding))]
-        print('scenario_embedding shape22:', np.array(scenario_embedding).shape)
 
         # Get embedding if NN-E model.
         if self.model_type == 'nn_e':

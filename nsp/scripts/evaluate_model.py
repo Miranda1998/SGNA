@@ -100,8 +100,8 @@ if __name__ == '__main__':
                         help='Type of model to evaluate.')
 
     # Optimization parameters
-    parser.add_argument('--time_limit', type=int, default=3 * 3600, help='Time limit for solver.')
-    parser.add_argument('--mip_gap', type=float, default=0.0001, help='Gap limit for solver.')
+    parser.add_argument('--time_limit', type=int, default=1 * 360, help='Time limit for solver.')
+    parser.add_argument('--mip_gap', type=float, default=0.01, help='Gap limit for solver.')
     parser.add_argument('--mip_threads', type=int, default=1, help='Number of threads for MIP solver.')
     parser.add_argument('--n_procs', type=int, default=1,
                         help='Number of processes for evaluting the first stage solution.')
