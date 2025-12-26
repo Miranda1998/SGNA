@@ -1,0 +1,39 @@
+
+Gurobi 12.0.3 (win64) logging started Thu Dec 25 19:04:20 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_lr_s20_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse500_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 21 rows, 25 columns and 125 nonzeros
+Model fingerprint: 0x782b24a8
+Variable types: 20 continuous, 5 integer (5 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+13]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e+00, 3e+16]
+Warning: Model contains large matrix coefficient range
+Warning: Model contains large rhs
+         Consider reformulating model or setting NumericFocus parameter
+         to avoid numerical issues.
+Presolve removed 21 rows and 25 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 1: 2.7503e+16 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 2.750295646970e+16, best bound 2.750295646970e+16, gap 0.0000%
+
+User-callback calls 201, time in user-callback 0.00 sec

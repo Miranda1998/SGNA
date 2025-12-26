@@ -24,7 +24,9 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
         x_in = mip.addVars(self.inst['n_bases'], vtype=gp.GRB.BINARY, name='x_in')
 
         # 添加约束，确保最多只有两个 x_in 等于 1
-        mip.addConstr(gp.quicksum(x_in[i] for i in x_in.keys()) == self.inst['fixed_bases'], "fixed_bases_x_in_equals_1")
+        # print('Adding fixed_bases constraint:', self.inst['fixed_bases'])
+        if self.inst['fixed_bases'] >= 0:
+            mip.addConstr(gp.quicksum(x_in[i] for i in x_in.keys()) == self.inst['fixed_bases'], "fixed_bases_x_in_equals_1")
 
         mip.update()
 
@@ -105,7 +107,7 @@ class DroneBaseLocationRoutingProblemApproximator(Approximator):
 
         results = {
             'time': total_time,
-            'predicted_obj': approximator_mip.objVal,
+            'predicted_obj': approximator_mip.ObjVal,
             'sol': first_stage_sol,
             'solving_results': solving_results,
             'solving_time': approximator_mip.Runtime

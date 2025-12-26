@@ -1,0 +1,120 @@
+
+Gurobi 12.0.3 (win64) logging started Thu Dec 25 19:07:57 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse500_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 3861 rows, 3865 columns and 15385 nonzeros
+Model fingerprint: 0xe705f45a
+Variable types: 2580 continuous, 1285 integer (1285 binary)
+Coefficient statistics:
+  Matrix range     [3e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 3850 rows and 3851 columns
+Presolve time: 0.01s
+Presolved: 11 rows, 14 columns, 47 nonzeros
+Variable types: 7 continuous, 7 integer (7 binary)
+Found heuristic solution: objective -38.0646018
+Found heuristic solution: objective -37.9766366
+
+Root relaxation: interrupted, 0 iterations, 0.00 seconds (0.00 work units)
+
+Explored 1 nodes (0 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -37.9766 -38.0646 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective -3.797663657521e+01, best bound -3.795040778154e+01, gap 0.0691%
+
+User-callback calls 632, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Thu Dec 25 21:37:39 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse500_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 3861 rows, 3865 columns and 15385 nonzeros
+Model fingerprint: 0xe705f45a
+Variable types: 2580 continuous, 1285 integer (1285 binary)
+Coefficient statistics:
+  Matrix range     [3e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 3850 rows and 3851 columns
+Presolve time: 0.01s
+Presolved: 11 rows, 14 columns, 47 nonzeros
+Variable types: 7 continuous, 7 integer (7 binary)
+Found heuristic solution: objective -38.0646018
+Found heuristic solution: objective -37.9766366
+
+Root relaxation: interrupted, 0 iterations, 0.00 seconds (0.00 work units)
+
+Explored 1 nodes (0 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -37.9766 -38.0646 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective -3.797663657521e+01, best bound -3.795040778154e+01, gap 0.0691%
+
+User-callback calls 631, time in user-callback 0.00 sec
+
+Gurobi 12.0.3 (win64) logging started Thu Dec 25 21:57:40 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s20_ts0_f5_c10_r2.0_iss1_bt1_nsp1000_nse500_sd7.log"
+Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: AMD Ryzen 7 5800H with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 3861 rows, 3865 columns and 15385 nonzeros
+Model fingerprint: 0xe705f45a
+Variable types: 2580 continuous, 1285 integer (1285 binary)
+Coefficient statistics:
+  Matrix range     [3e-05, 1e+05]
+  Objective range  [5e-02, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 3850 rows and 3851 columns
+Presolve time: 0.01s
+Presolved: 11 rows, 14 columns, 47 nonzeros
+Variable types: 7 continuous, 7 integer (7 binary)
+Found heuristic solution: objective -38.0646018
+Found heuristic solution: objective -37.9766366
+
+Root relaxation: interrupted, 0 iterations, 0.00 seconds (0.00 work units)
+
+Explored 1 nodes (0 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 1 (of 16 available processors)
+
+Solution count 2: -37.9766 -38.0646 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective -3.797663657521e+01, best bound -3.795040778154e+01, gap 0.0691%
+
+User-callback calls 631, time in user-callback 0.00 sec

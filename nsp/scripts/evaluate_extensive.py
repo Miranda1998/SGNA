@@ -1,4 +1,5 @@
 import argparse
+import copy
 import pickle
 import time
 from pathlib import Path
@@ -48,6 +49,12 @@ def main(args):
                                     node_file_dir=str(node_file_dir),
                                     test_set=args.test_set)
     ef_time = time.time() - ef_time
+
+    Incumbent = ef_mip.objVal
+    Dual_bound = ef_mip.ObjBound
+
+    print(f'  New_Incumbent:   {Incumbent}')
+    print(f'  New_Dual bound:  {Dual_bound} ')
 
     # get first stage solution and objective of first stage solution
     first_stage_sol = two_sp.get_first_stage_extensive_solution(ef_mip)

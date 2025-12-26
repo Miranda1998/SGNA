@@ -2,7 +2,6 @@ from multiprocessing import Manager, Pool
 
 import gurobipy as gp
 import numpy as np
-from geopy.distance import geodesic
 from nsp.utils.dblrp import haversine
 from .two_sp import TwoStageStocProg
 import pdb
@@ -352,14 +351,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                 coord2 = args[0][int(j[1:])][l]  # 意大利，罗马的经纬度
 
                             # 计算两个经纬度之间的地理距离
-                            distance = geodesic(coord1, coord2).kilometers  # (latitude, longitude)
-                            dis1 = haversine(coord1, coord2)
-
-                            # print('distance111', distance)
-                            # print('dis1111', dis1)
-                            if distance - dis1 > 1:
-                                print('distan-dis', distance - dis1)
-
+                            # distance = geodesic(coord1, coord2).kilometers  # (latitude, longitude)
+                            distance = haversine(coord1, coord2)
 
                             model.addConstr(
                                  (l - k - 1) * var_dict[f"x_{u}_{k}_{j}_{l}"] <=
@@ -451,7 +444,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
             # print("这里的第二阶段目标值就开始不对了吗", model.objVal)
 
         second_stage_obj = self.get_second_stage_cost(model)
-        # print('second_stage_obj(已加上第一阶段cost)=', second_stage_obj)
+
         return second_stage_obj
 
 
@@ -483,9 +476,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
             for var_name, var in var_dict_from_model.items():
                 # 假设 reward 数据已经在 inst 中
                 if "y" in var_name:
-                    fist_stage_cost += -self.inst['base_costs'][var_name.split('_')[1]] * var.x # 根据变量名提取 u
+                    fist_stage_cost += -self.inst['base_costs'][var_name.split('_')[1]] * var.x  # 根据变量名提取 u
 
-            second_stage_obj = model.objVal + fist_stage_cost
+            second_stage_obj = model.objVal - fist_stage_cost
 
         else:
             print("Model optimization was not successful. Status:", model.status)
@@ -521,9 +514,9 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
             second_stage_costs = list(mp_list)
 
-        second_stage_obj_val = np.sum(second_stage_costs) # 这里的第二阶段目标函数已包括了第一阶段的cost
+        second_stage_obj_val = np.sum(second_stage_costs)  # 这里的第二阶段目标函数已包括了第一阶段的cost
 
-        return second_stage_obj_val
+        return second_stage_obj_val + first_stage_obj_val
 
     def mp_get_second_stage_obj(self, sol, scenario, scenario_prob, gap, time_limit, verbose, mp_list):
         """ Multiprocessing """
