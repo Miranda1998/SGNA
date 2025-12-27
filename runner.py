@@ -220,11 +220,13 @@ if __name__ == '__main__':
     # it is if one wants to reproduce results for multiple problems, then all problems should be incldued.
     # The cflp_10_10 example is provided below:
     #   - Generate instance: 
-    #       python runner.py --problems dblrp_10_10 --run_dg_inst 1 --as_dat 1
-    #       python -m nsp.scripts.run_dm --problem dblrp_5_10 --mode GEN_INSTANCE
+    #       python runner.py --problems dblrp_1
+    #       0_10 --run_dg_inst 1 --as_dat 1
+    #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_INSTANCE
     #   - Generate datasets: 
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --as_dat 1
     #       nohup python -m nsp.scripts.run_dm --problem dblrp_5_10 --mode GEN_DATASET_P --n_procs -1 && nohup python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_E --n_procs -1
+    #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_P --n_procs -1 && python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_E --n_procs -1
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --run_dg_e 1 --as_dat 1
     #   - Train Models: 
     #       python runner.py --problems dblrp_10_10 --train_lr 1 --train_nn_p 1 --train_nn_e 1 --as_dat 1
