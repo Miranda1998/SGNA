@@ -1,0 +1,57 @@
+
+Gurobi 12.0.1 (win64) logging started Sun Dec 28 16:23:53 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_e_s5_ts0_f10_c10_r2.0_iss1_bt1_nsp5000_nse2000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 1537 rows, 1547 columns and 8705 nonzeros
+Model fingerprint: 0xeceb8d21
+Variable types: 1025 continuous, 522 integer (522 binary)
+Coefficient statistics:
+  Matrix range     [5e-07, 1e+05]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e-03, 1e+05]
+Presolve removed 1516 rows and 1516 columns
+Presolve time: 0.01s
+Presolved: 21 rows, 31 columns, 112 nonzeros
+Variable types: 14 continuous, 17 integer (17 binary)
+Found heuristic solution: objective 1.6163040
+Found heuristic solution: objective 8.6144461
+Found heuristic solution: objective 142.0460285
+
+Root relaxation: objective 1.813533e+02, 7 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  181.35328    0    1  142.04603  181.35328  27.7%     -    0s
+H    0     0                     173.8470796  181.35328  4.32%     -    0s
+H    0     0                     174.0466294  181.35328  4.20%     -    0s
+H    0     0                     174.3393035  181.35328  4.02%     -    0s
+     0     0  177.11449    0    2  174.33930  177.11449  1.59%     -    0s
+     0     0     cutoff    0       174.33930  174.33930  0.00%     -    0s
+
+Cutting planes:
+  Cover: 1
+  Flow cover: 7
+  RLT: 1
+  Relax-and-lift: 1
+
+Explored 1 nodes (12 simplex iterations) in 0.11 seconds (0.01 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 6: 174.339 174.047 173.847 ... 1.6163
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 1.743393034879e+02, best bound 1.743393034879e+02, gap 0.0000%
+
+User-callback calls 321, time in user-callback 0.00 sec

@@ -75,6 +75,7 @@ def main(args):
     }
 
     print("Extensive form stats:")
+    print('reward=', inst['reward'])
     print(f'  Incumbent:   {ef_mip.objVal}')
     print(f'  Dual bound:  {ef_mip.ObjBound} ')
     print(f'  FS obj:      {ef_fs_obj} ')

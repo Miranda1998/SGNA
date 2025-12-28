@@ -177,6 +177,7 @@ class FacilityLocationProblem(TwoStageStocProg):
         model.setParam("Threads", threads)
 
         model.optimize(callback)
+
         return model
 
     def get_second_stage_objective(self, sol, demands, gap=0.0001, time_limit=1e7, threads=1, verbose=0):

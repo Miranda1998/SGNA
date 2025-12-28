@@ -80,8 +80,11 @@ def get_scenario_and_test_sets(problem):
         scenarios = [20, 50, 100]
         test_sets = list(range(0, 1))
     elif problem == 'dblrp_10_10':
-        scenarios = [20, 50, 100]
-        test_sets = list(range(0, 1))
+        scenarios = [5]
+        test_sets = list(range(0, 5))
+    elif problem == 'dblrp_20_10':
+        scenarios = [10]
+        test_sets = list(range(0, 5))
 
 
     return scenarios, test_sets
@@ -225,7 +228,7 @@ if __name__ == '__main__':
     #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_INSTANCE
     #   - Generate datasets: 
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --as_dat 1
-    #       nohup python -m nsp.scripts.run_dm --problem dblrp_5_10 --mode GEN_DATASET_P --n_procs -1 && nohup python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_E --n_procs -1
+    #       nohup python -m nsp.scripts.run_dm --problem dblrp_20_10 --mode GEN_DATASET_P --n_procs -1 && nohup python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_E --n_procs -1
     #       python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_P --n_procs -1 && python -m nsp.scripts.run_dm --problem dblrp_10_10 --mode GEN_DATASET_E --n_procs -1
     #       python runner.py --problems dblrp_10_10 --run_dg_p 1 --run_dg_e 1 --as_dat 1
     #   - Train Models: 
@@ -234,11 +237,11 @@ if __name__ == '__main__':
     #       python runner.py --problems dblrp_10_10 --get_best_nn_p_model 1 --get_best_nn_e_model 1 --as_dat 1
     #       python -m nsp.scripts.get_best_model --problem dblrp_10_10 --model nn_p
     #   - Evaluate Models and Extensive Form: 
-    #       python runner.py --problems dblrp_5_10 --eval_lr 1 --eval_ef 1 --eval_nn_e 1 --eval_nn_p 1 --as_dat 1
+    #       python runner.py --problems dblrp_10_10 --eval_lr 1 --eval_ef 1 --eval_nn_e 1 --eval_nn_p 1 --as_dat 1
     #       python runner.py --problems dblrp_10_10 --eval_lr 1 --as_dat 1
     #       python runner.py --problems dblrp_5_10 --eval_nn_p 1 --as_dat 1
     #       python runner.py --problems dblrp_10_10 --eval_nn_e 1 --as_dat 1
-    #       python runner.py --problems dblrp_5_10 --eval_ef 1 --as_dat 1
+    #       python runner.py --problems dblrp_20_10 --eval_ef 1 --as_dat 1
 
 
     parser.add_argument('--as_dat', type=int, default=0,

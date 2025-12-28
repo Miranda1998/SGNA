@@ -78,6 +78,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
         inst['minmax_norm'] = cfg.minmax_norm
         inst['base_costs_each'] = cfg.base_costs_each
         inst['T'] = cfg.T
+        inst['time_slot'] = cfg.time_slot
         inst['n_drones'] = cfg.n_drones
         inst['drone_each_base'] = cfg.drone_each_base
         inst['max_route_time'] = cfg.max_route_time

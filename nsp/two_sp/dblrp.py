@@ -51,6 +51,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         scenario_set = [s for s in range(n_scenarios)]
         Time_set = [t for t in range(self.T)]
 
+
+
         # binary variables for each location
         for u in bases_set:
             # bound lower and upper to solution
@@ -200,10 +202,10 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
                                 model.addConstr(
                                     (l - k - 1) * var_dict[f"x_{u}_{k}_{j}_{l}_{s}"] <=
-                                    distance / self.inst['drone_speed'] * 12 + self.inst['observation_time'],
+                                    distance / self.inst['drone_speed'] * (60/self.inst['time_slot']) + self.inst['observation_time'],
                                     name='constraint_cruising_time_02_%s_%s_%s_%s_%s' % (u, k, j, l, s))
 
-                                model.addConstr((distance / self.inst['drone_speed'] * 12 +
+                                model.addConstr((distance / self.inst['drone_speed'] * (60/self.inst['time_slot']) +
                                                  self.inst['observation_time']) * var_dict[f"x_{u}_{k}_{j}_{l}_{s}"]
                                                 <= (l - k),
                                                 name='constraint_cruising_time_02_%s_%s_%s_%s_%s' % (u, k, j, l, s))
@@ -356,10 +358,10 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
                             model.addConstr(
                                  (l - k - 1) * var_dict[f"x_{u}_{k}_{j}_{l}"] <=
-                                 distance/self.inst['drone_speed']*12 + self.inst['observation_time'],
+                                 distance/self.inst['drone_speed']*(60/ self.inst['time_slot']) + self.inst['observation_time'],
                                 name='constraint_cruising_time_02_%s_%s_%s_%s' % (u, k, j, l))
 
-                            model.addConstr((distance / self.inst['drone_speed']*12 +
+                            model.addConstr((distance / self.inst['drone_speed']*(60/ self.inst['time_slot']) +
                                             self.inst['observation_time'])* var_dict[f"x_{u}_{k}_{j}_{l}"]
                                             <= (l - k),
                                 name='constraint_cruising_time_02_%s_%s_%s_%s' % (u, k, j, l))
@@ -575,10 +577,12 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         rng = np.random.RandomState()
         rng.seed(n_scenarios)
 
+        test_set_int = int(test_set)
+
         scenarios = []
         for _ in range(n_scenarios):
             # 生成随机历史位置数据作为输入
-            trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K, seed=_)
+            trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K, seed=_+test_set_int)
             hist_real = inverse_points_minmax(trajs, minmax_norm)[0].detach().cpu().numpy()
             scenarios.append(hist_real)
 
