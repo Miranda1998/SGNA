@@ -1,81 +1,31 @@
 from types import SimpleNamespace
 
-# -----------------------------------------#
-#   Capacited Facility Location Problem   #
-# -----------------------------------------#
+# 算法相关参数
+time_limit=60
+mip_gap=0.01
+tr_split=0.80
+verbose=0
+seed=7
 
-# cflp_10_10 = SimpleNamespace(
-#     n_facilities=10,
-#     n_customers=10,
-#     ratio=2.0,
-#     flag_integer_second_stage=True,
-#     flag_bound_tightening=True,
-#     n_samples_p=10000,              # NN-P specific data generation
-#     n_samples_per_scenario=10,      # NN-P specific data generation
-#     n_samples_e=5000,               # NN-E specific data generation
-#     n_max_scenarios_in_tr=100,      # NN-E specific data generation
-#     time_limit=60,                  # data generation
-#     mip_gap=0.01,                   # data generation
-#     tr_split=0.80,                  # data generation
-#     verbose=0,                      # data generation
-#     seed=7,
-#     data_path='./data'
-# )
+# base相关参数
+base_costs_each=50
+my_drone_each_base = 5
 
-cflp_10_10 = SimpleNamespace(
-    n_facilities=10,
-    n_customers=10,
-    ratio=2.0,
-    flag_integer_second_stage=True,
-    flag_bound_tightening=True,
-    n_samples_p=1000,              # NN-P specific data generation
-    n_samples_per_scenario=100,      # NN-P specific data generation
-    n_samples_e=5,               # NN-E specific data generation
-    n_max_scenarios_in_tr=5,      # NN-E specific data generation
-    time_limit=10,                  # data generation
-    mip_gap=0.01,                   # data generation
-    tr_split=0.80,                  # data generation
-    verbose=0,                      # data generation
-    seed=7,
-    data_path='./data'
-)
+# 无人机相关参数
+max_route_time=12
+drone_speed=55.56
+observation_time=1
 
-my_drone_each_base = 1
-dblrp_5_10 = SimpleNamespace(
-    n_bases=5,
-    fixed_bases=-1,  # fixed_base = -1 代表不固定基站数量
-    n_vessels=10,
-    ratio=2.0,
-    flag_integer_second_stage=True,
-    flag_bound_tightening=True,
-    n_samples_p=1000,              # NN-P specific data generation
-    n_samples_per_scenario=100,      # NN-P specific data generation
-    n_samples_e=500,               # NN-E specific data generation
-    n_max_scenarios_in_tr=20,      # NN-E specific data generation
-    time_limit=60,                  # data generation
-    mip_gap=0.01,                   # data generation
-    tr_split=0.80,                  # data generation
-    verbose=0,                      # data generation
-    seed=7,
-    base_costs_each=10,
-    T=36,
-    time_slot=10,
-    n_drones=5 * my_drone_each_base,
-    drone_each_base=my_drone_each_base,
-    max_route_time=36,
-    drone_speed=74,  # 40节换算成km/h
-    observation_time=1,
-    data_path='./data',
-    cVAE_model_path='./nsp/scenario_gen/cvae_epoch180_20251013_151341.pt',
-    x_hist_path='./data/dblrp/dblrp_10_xhist.npy',
-    minmax_norm='./data/dblrp/minmax_norm.json',
-    base_pos_path='./data/dblrp/dblrp_5_10_base_positions.npy'
-)
+# 其他参数
+T=36
+time_slot=10
 
+n_bases=10
+n_vessels=10
 dblrp_10_10 = SimpleNamespace(
-    n_bases=10,
+    n_bases=n_bases,
     fixed_bases=-1,  # fixed_base = -1 代表不固定基站数量
-    n_vessels=10,
+    n_vessels=n_vessels,
     ratio=2.0,
     flag_integer_second_stage=True,
     flag_bound_tightening=True,
@@ -83,55 +33,23 @@ dblrp_10_10 = SimpleNamespace(
     n_samples_per_scenario=500,      # NN-P specific data generation
     n_samples_e=2000,               # NN-E specific data generation
     n_max_scenarios_in_tr=10,      # NN-E specific data generation
-    time_limit=60,                  # data generation
-    mip_gap=0.01,                   # data generation
-    tr_split=0.80,                  # data generation
-    verbose=0,                      # data generation
-    seed=7,
-    base_costs_each=10,
-    T=36,
-    time_slot=10,
-    n_drones=10 * my_drone_each_base,
+    time_limit=time_limit,         # data generation
+    mip_gap=mip_gap,                   # data generation
+    tr_split=tr_split,                  # data generation
+    verbose=verbose,                      # data generation
+    seed=seed,
+    base_costs_each=base_costs_each,
+    T=T,
+    time_slot=time_slot,
+    n_drones=n_bases * my_drone_each_base,
     drone_each_base=my_drone_each_base,
-    max_route_time=36,
-    drone_speed=74,  # 40节换算成km/h
-    observation_time=1,
+    max_route_time=max_route_time,
+    drone_speed=drone_speed,  # 节换算成km/h
+    observation_time=observation_time,
     data_path='./data',
-    cVAE_model_path='./nsp/scenario_gen/cvae_epoch180_20251013_151341.pt',
+    cVAE_model_path='./nsp/scenario_gen/best_model.pt',
     x_hist_path='./data/dblrp/dblrp_10_xhist.npy',
     minmax_norm='./data/dblrp/minmax_norm.json',
     base_pos_path='./data/dblrp/dblrp_10_10_base_positions.npy'
-)
-
-
-dblrp_20_10 = SimpleNamespace(
-    n_bases=20,
-    fixed_bases=-1,  # fixed_base = -1 代表不固定基站数量
-    n_vessels=10,
-    ratio=2.0,
-    flag_integer_second_stage=True,
-    flag_bound_tightening=True,
-    n_samples_p=5000,               # NN-P specific data generation
-    n_samples_per_scenario=500,     # NN-P specific data generation
-    n_samples_e=2000,               # NN-E specific data generation
-    n_max_scenarios_in_tr=10,       # NN-E specific data generation
-    time_limit=60,                  # data generation
-    mip_gap=0.01,                   # data generation
-    tr_split=0.80,                  # data generation
-    verbose=0,                      # data generation
-    seed=7,
-    base_costs_each=10,
-    T=36,
-    time_slot=10,
-    n_drones=20 * my_drone_each_base,
-    drone_each_base=my_drone_each_base,
-    max_route_time=36,
-    drone_speed=74,  # 40节换算成km/h
-    observation_time=1,
-    data_path='./data',
-    cVAE_model_path='./nsp/scenario_gen/cvae_epoch180_20251013_151341.pt',
-    x_hist_path='./data/dblrp/dblrp_20_xhist.npy',
-    minmax_norm='./data/dblrp/minmax_norm.json',
-    base_pos_path='./data/dblrp/dblrp_20_10_base_positions.npy'
 )
 

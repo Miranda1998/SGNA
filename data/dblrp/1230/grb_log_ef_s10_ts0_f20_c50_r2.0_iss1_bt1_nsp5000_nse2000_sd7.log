@@ -1,0 +1,37 @@
+
+Gurobi 12.0.1 (win64) logging started Mon Dec 29 21:14:05 2025
+
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s10_ts0_f20_c50_r2.0_iss1_bt1_nsp5000_nse2000_sd7.log"
+Set parameter NodefileStart to value 0.5
+Set parameter NodefileDir to value "node_files\s10_ts0"
+Set parameter MIPGap to value 0.01
+Set parameter TimeLimit to value 7200
+Set parameter Threads to value 1
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  7200
+MIPGap  0.01
+NodefileStart  0.5
+Threads  1
+
+Optimize a model with 92636500 rows, 30902620 columns and 254080000 nonzeros
+Model fingerprint: 0x5aca96bc
+Variable types: 0 continuous, 30902620 integer (30870020 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 7e+01]
+  Objective range  [1e+00, 1e+01]
+  Bounds range     [1e+00, 4e+01]
+  RHS range        [1e+00, 4e+01]
+
+Explored 0 nodes (0 simplex iterations) in 36.85 seconds (41.58 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 0
+
+Best objective -, best bound -, gap -
+
+User-callback calls 727, time in user-callback 0.08 sec

@@ -82,10 +82,16 @@ def get_scenario_and_test_sets(problem):
     elif problem == 'dblrp_10_10':
         scenarios = [5]
         test_sets = list(range(0, 5))
+    elif problem == 'dblrp_10_30':
+        scenarios = [5]
+        test_sets = list(range(0, 5))
     elif problem == 'dblrp_20_10':
         scenarios = [10]
         test_sets = list(range(0, 5))
 
+    elif problem == 'dblrp_40_40':
+        scenarios = [10]
+        test_sets = list(range(0, 5))
 
     return scenarios, test_sets
 
@@ -241,7 +247,7 @@ if __name__ == '__main__':
     #       python runner.py --problems dblrp_10_10 --eval_lr 1 --as_dat 1
     #       python runner.py --problems dblrp_5_10 --eval_nn_p 1 --as_dat 1
     #       python runner.py --problems dblrp_10_10 --eval_nn_e 1 --as_dat 1
-    #       python runner.py --problems dblrp_20_10 --eval_ef 1 --as_dat 1
+    #       python runner.py --problems dblrp_20_50 --eval_ef 1 --as_dat 1
 
 
     parser.add_argument('--as_dat', type=int, default=0,
