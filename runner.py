@@ -65,33 +65,11 @@ def get_scenario_and_test_sets(problem):
     """  Gets scenario set sizes and test set indexes to
          reproduce results from the paper.
     """
-    if problem == 'cflp_10_10':
-        scenarios = [100, 500, 1000]
-        test_sets = list(range(0, 11))
-    elif problem == 'cflp_25_25':
-        scenarios = [100, 500, 1000]
-        test_sets = list(range(0, 11))
-    elif problem == 'cflp_50_50':
-        scenarios = [100, 500, 1000]
-        test_sets = list(range(0, 11))
-
     # Stochastic Server Location Problem
-    elif problem == 'dblrp_5_10':
-        scenarios = [20, 50, 100]
+    if problem == 'dblrp_10_10':
+        scenarios = [10, 20, 30, 40, 50]
         test_sets = list(range(0, 1))
-    elif problem == 'dblrp_10_10':
-        scenarios = [1]
-        test_sets = list(range(0, 5))
-    elif problem == 'dblrp_10_30':
-        scenarios = [5]
-        test_sets = list(range(0, 5))
-    elif problem == 'dblrp_20_10':
-        scenarios = [10]
-        test_sets = list(range(0, 5))
 
-    elif problem == 'dblrp_40_40':
-        scenarios = [10]
-        test_sets = list(range(0, 5))
 
     return scenarios, test_sets
 

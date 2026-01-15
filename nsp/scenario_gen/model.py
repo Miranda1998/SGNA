@@ -432,13 +432,7 @@ class CVAE(nn.Module):
     def sample(self, x_hist, stat=None, K=10, seed=None):
 
         print("seed=", seed)
-        print("rng head:", torch.rand(3, device=x_hist.device))
-        # 如果提供了种子，设置随机数种子
-        # if seed is not None:
-        #     torch.manual_seed(seed)  # 设置CPU上的种子
-        #     if torch.cuda.is_available():
-        #         torch.cuda.manual_seed(seed)  # 设置CUDA上的种子
-        #         torch.cuda.manual_seed_all(seed)  # 确保所有CUDA设备的种子都一致
+        # print("rng head:", torch.rand(3, device=x_hist.device))
 
         self.eval()
         B = x_hist.size(0)

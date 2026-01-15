@@ -619,3 +619,4 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         # print('first_scenario', scenarios[0])
         return scenarios
+

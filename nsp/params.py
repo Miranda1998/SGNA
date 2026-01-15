@@ -53,3 +53,4 @@ dblrp_10_10 = SimpleNamespace(
     base_pos_path='./data/dblrp/dblrp_10_base_positions.npy'
 )
 
+
