@@ -434,8 +434,6 @@ class DroneBaseLocationRoutingDataManager(DataManager):
             hist_real = inverse_points_minmax(trajs, minmax_norm)[0].detach().cpu().numpy()
             hist_real_half = hist_real[:, ::2, :].copy()  # 每隔一个时刻取一次，保留奇数索引
             scenarios.append(hist_real_half)
-            print('n=', _)
-            print('traj_0', hist_real_half[0])
 
         return scenarios
 
