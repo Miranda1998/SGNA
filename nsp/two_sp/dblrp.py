@@ -602,17 +602,17 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         with open(self.inst['minmax_norm'], 'r') as f:
             minmax_norm = json.load(f)
 
-        rng = np.random.RandomState()
-        rng.seed(n_scenarios)
-
         if if_ef_train:
             test_set_int = 1998
+            # test_set_int = int(test_set)
         else:
             test_set_int = int(test_set)
 
         scenarios = []
         for _ in range(n_scenarios):
             # 生成随机历史位置数据作为输入
+            rng = np.random.RandomState()
+            rng.seed(_+test_set_int)
             trajs, prior_logprob, mus, logvars = model.sample(x_hist, stat=stat, K=K, seed=_+test_set_int)
             hist_real = inverse_points_minmax(trajs, minmax_norm)[0].detach().cpu().numpy()
             scenarios.append(hist_real)

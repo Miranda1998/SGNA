@@ -432,12 +432,13 @@ class CVAE(nn.Module):
     def sample(self, x_hist, stat=None, K=10, seed=None):
 
         print("seed=", seed)
+        print("rng head:", torch.rand(3, device=x_hist.device))
         # 如果提供了种子，设置随机数种子
-        if seed is not None:
-            torch.manual_seed(seed)  # 设置CPU上的种子
-            if torch.cuda.is_available():
-                torch.cuda.manual_seed(seed)  # 设置CUDA上的种子
-                torch.cuda.manual_seed_all(seed)  # 确保所有CUDA设备的种子都一致
+        # if seed is not None:
+        #     torch.manual_seed(seed)  # 设置CPU上的种子
+        #     if torch.cuda.is_available():
+        #         torch.cuda.manual_seed(seed)  # 设置CUDA上的种子
+        #         torch.cuda.manual_seed_all(seed)  # 确保所有CUDA设备的种子都一致
 
         self.eval()
         B = x_hist.size(0)
@@ -451,6 +452,7 @@ class CVAE(nn.Module):
         trajs, prior_lp, mus, logvars = [], [], [], []
         for _ in range(K):
             z = reparameterize(mu_p, logvar_p)
+
             cond = torch.cat([h_enc, z, stat], dim=1)
             # 关键：采样时也把 z 传入解码器
             mu, logvar, _ = self.dec(cond, z, last_pos=last_pos)
