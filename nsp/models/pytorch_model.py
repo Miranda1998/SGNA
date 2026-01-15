@@ -424,7 +424,7 @@ class ReLUNetworkExpectedModel(Model):
             if ((epoch + 1) % self.log_freq) == 0:
                 self._val_epoch(epoch, tr_results, val_results, best_results)
 
-            if (epoch+1) % 5000 == 0:
+            if (epoch+1) % 500 == 0:
                 print(f"  Epoch {epoch+1}/{self.n_epochs} completed.")
                 # 绘制 MSE 下降曲线
                 self.plot_mse_curve(tr_results['mse'], title=f"Training MSE Curve up to Epoch {epoch+1}")

@@ -8,11 +8,11 @@ verbose=0
 seed=7
 
 # base相关参数
-base_costs_each=50
-my_drone_each_base = 5
+base_costs_each=20
+my_drone_each_base = 3
 
 # 无人机相关参数
-max_route_time=12
+max_route_time=24
 drone_speed=55.56
 observation_time=1
 
@@ -31,8 +31,8 @@ dblrp_10_10 = SimpleNamespace(
     flag_bound_tightening=True,
     n_samples_p=10000,              # NN-P specific data generation
     n_samples_per_scenario=500,      # NN-P specific data generation
-    n_samples_e=2000,               # NN-E specific data generation
-    n_max_scenarios_in_tr=10,      # NN-E specific data generation
+    n_samples_e=5000,               # NN-E specific data generation
+    n_max_scenarios_in_tr=20,      # NN-E specific data generation
     time_limit=time_limit,         # data generation
     mip_gap=mip_gap,                   # data generation
     tr_split=tr_split,                  # data generation
@@ -48,8 +48,8 @@ dblrp_10_10 = SimpleNamespace(
     observation_time=observation_time,
     data_path='./data',
     cVAE_model_path='./nsp/scenario_gen/best_model.pt',
-    x_hist_path='./data/dblrp/dblrp_10_xhist.npy',
+    x_hist_path='./data/dblrp/x_hist_10.npy',
     minmax_norm='./data/dblrp/minmax_norm.json',
-    base_pos_path='./data/dblrp/dblrp_10_10_base_positions.npy'
+    base_pos_path='./data/dblrp/dblrp_10_base_positions.npy'
 )
 

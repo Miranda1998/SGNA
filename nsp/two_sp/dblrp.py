@@ -97,6 +97,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                 obj += scenario_prob * self.inst['reward'][j] * gp.quicksum(
                     var_dict[f"x_{i}_{k}_{j}_{l}_{s}"] for i in nodes_set for k in Time_set for l in Time_set if l > k)
 
+        print("self.inst['reward']", self.inst['reward'])
+
         # 目标函数 最大化 obj
         model.setObjective(obj, gp.GRB.MAXIMIZE)
 
@@ -144,12 +146,26 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                         name='constraint_flow_balance_%s_%s_%s' % (v, k, s))
         print('Done5')
 
+        # for s in scenario_set:
+        #     for v in nodes_set:
+        #         model.addConstr(
+        #             gp.quicksum(var_dict[f"x_{v}_{k}_{j}_{l}_{s}"] for k in Time_set for j in nodes_set
+        #                         for l in Time_set if l > k) <= 1,
+        #             name='constraint_visit_most_once_%s_%s' % (v, s))
+
         for s in scenario_set:
-            for v in nodes_set:
+            for v in vessels_set:
                 model.addConstr(
                     gp.quicksum(var_dict[f"x_{v}_{k}_{j}_{l}_{s}"] for k in Time_set for j in nodes_set
                                 for l in Time_set if l > k) <= 1,
                     name='constraint_visit_most_once_%s_%s' % (v, s))
+
+        for s in scenario_set:
+            for i in bases_set:
+                model.addConstr(
+                    gp.quicksum(var_dict[f"x_{v}_{k}_{j}_{l}_{s}"] for k in Time_set for l in Time_set
+                                if l > k) == 0, name='constraint_no_trans_in_bases%s' % (i))
+
         print('Done6')
 
         for s in scenario_set:
@@ -306,10 +322,20 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                     == gp.quicksum(var_dict[f"x_{j}_{l}_{v}_{k}"] for j in nodes_set for l in Time_set if k > l),
                     name='constraint_flow_balance_%s_%s' % (v, k))
 
-        for i in nodes_set:
+        # for i in nodes_set:
+        #     model.addConstr(
+        #         gp.quicksum(var_dict[f"x_{i}_{k}_{j}_{l}"] for k in Time_set for j in nodes_set for l in Time_set
+        #                     if l > k) <= 1, name='constraint_visit_most_once_%s' % (i))
+
+        for i in vessels_set:
             model.addConstr(
                 gp.quicksum(var_dict[f"x_{i}_{k}_{j}_{l}"] for k in Time_set for j in nodes_set for l in Time_set
                             if l > k) <= 1, name='constraint_visit_most_once_%s' % (i))
+
+        for i in bases_set:
+            model.addConstr(
+                gp.quicksum(var_dict[f"x_{i}_{k}_{i}_{l}"] for k in Time_set for l in Time_set
+                            if l > k) == 0, name='constraint_no_trans_in_bases%s' % (i))
 
         for v in vessels_set:
             for k in Time_set:
@@ -384,7 +410,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                 self.ef_solving_results['incumbent'].append(model.cbGetSolution(model._x ))
 
         # make extensive form
-        scenarios = self.get_scenarios(n_scenarios, test_set)
+        scenarios = self.get_scenarios(n_scenarios, test_set, if_ef_train=True)
+        print("scenarios:", scenarios[0][0])
         model = self._make_extensive_model(scenarios)
 
         # get variables for callback
@@ -491,7 +518,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                                  test_set="0", n_procs=1):
         """ Evaluates the first stage solution across all scenarios. """
         scenarios = self.get_scenarios(n_scenarios, test_set)
-        n_scenarios = len(scenarios)
+        print("scenarios:", scenarios[0][0])
+
         scenario_prob = 1 / len(scenarios)
 
         # evaluate first stage values
@@ -546,7 +574,7 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         return self.get_first_stage_solution(model)
 
 
-    def get_scenarios(self, n_scenarios, test_set):
+    def get_scenarios(self, n_scenarios, test_set, if_ef_train=False):
         # 设备选择
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -577,7 +605,10 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
         rng = np.random.RandomState()
         rng.seed(n_scenarios)
 
-        test_set_int = int(test_set)
+        if if_ef_train:
+            test_set_int = 1998
+        else:
+            test_set_int = int(test_set)
 
         scenarios = []
         for _ in range(n_scenarios):

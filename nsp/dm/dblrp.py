@@ -102,7 +102,7 @@ class DroneBaseLocationRoutingDataManager(DataManager):
 
         inst['reward'] = {}
         for v in vessels_set:
-            inst['reward'][v] = rng.rand() * 20 + 10  # reward between 10 and 30
+            inst['reward'][v] = rng.rand() * 10 + 10  # reward between 10 and 20
 
         for u in bases_set:
             inst['reward'][u] = 0  # reward between 10 and 30

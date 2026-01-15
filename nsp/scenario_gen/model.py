@@ -431,6 +431,7 @@ class CVAE(nn.Module):
     @torch.no_grad()
     def sample(self, x_hist, stat=None, K=10, seed=None):
 
+        print("seed=", seed)
         # 如果提供了种子，设置随机数种子
         if seed is not None:
             torch.manual_seed(seed)  # 设置CPU上的种子

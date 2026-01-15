@@ -156,6 +156,8 @@ class FacilityLocationProblem(TwoStageStocProg):
 
         # make extensive form 
         scenarios = self.get_scenarios(n_scenarios, test_set)
+
+        print('scenarios:', scenarios[0])
         model = self._make_extensive_model(scenarios)
 
         # get variables for callback
@@ -202,6 +204,7 @@ class FacilityLocationProblem(TwoStageStocProg):
         """ Gets the objective function value for a given solution. """
 
         scenarios = self.get_scenarios(n_scenarios, test_set)
+        print("scenarios:", scenarios[0][0][0])
         scenario_prob = 1 / len(scenarios)
 
         # evaluate first stage values

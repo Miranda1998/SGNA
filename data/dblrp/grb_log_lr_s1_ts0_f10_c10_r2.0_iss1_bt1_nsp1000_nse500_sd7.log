@@ -1,0 +1,35 @@
+
+Gurobi 12.0.1 (win64) logging started Tue Jan  6 21:18:27 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_lr_s1_ts0_f10_c10_r2.0_iss1_bt1_nsp1000_nse500_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 1 rows, 11 columns and 11 nonzeros
+Model fingerprint: 0xb53cf507
+Variable types: 1 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [6e-01, 4e+01]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+01, 2e+01]
+Presolve removed 1 rows and 11 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 5.18344 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 5.183436587282e+00, best bound 5.183436587282e+00, gap 0.0000%
+
+User-callback calls 142, time in user-callback 0.00 sec
