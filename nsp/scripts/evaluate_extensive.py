@@ -53,9 +53,6 @@ def main(args):
     Incumbent = ef_mip.objVal
     Dual_bound = ef_mip.ObjBound
 
-    print(f'  New_Incumbent:   {Incumbent}')
-    print(f'  New_Dual bound:  {Dual_bound} ')
-
     # get first stage solution and objective of first stage solution
     first_stage_sol = two_sp.get_first_stage_extensive_solution(ef_mip)
     ef_fs_obj = two_sp.evaluate_first_stage_sol(first_stage_sol,
@@ -66,19 +63,23 @@ def main(args):
 
     results = {
         'time_total': ef_time,
-        'obj': ef_mip.objVal,
-        'dual': ef_mip.ObjBound,
+        'Incumbent':Incumbent,
+        'Dual_bound':Dual_bound,
+        'New_Incumbent': ef_mip.objVal,
+        'New_Dual bound': ef_mip.ObjBound,
         'sol': first_stage_sol,
-        'true_obj': ef_fs_obj,
+        'test_obj': ef_fs_obj,
         'solving_results': two_sp.ef_solving_results,
         'time_ef_mip': ef_mip.Runtime,
     }
 
     print("Extensive form stats:")
     print('reward=', inst['reward'])
-    print(f'  Incumbent:   {ef_mip.objVal}')
-    print(f'  Dual bound:  {ef_mip.ObjBound} ')
-    print(f'  FS obj:      {ef_fs_obj} ')
+    print(f'  Incumbent:   {Incumbent}')
+    print(f'  Dual bound:  {Dual_bound} ')
+    print(f'  New_Incumbent:   {ef_mip.objVal}')
+    print(f'  New_Dual bound:  {ef_mip.ObjBound} ')
+    print(f'  test obj:      {ef_fs_obj} ')
     print(f'  Time:        {ef_time}')
     print(f"  y:           {first_stage_sol}")
 

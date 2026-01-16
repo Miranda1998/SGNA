@@ -154,6 +154,7 @@ class FacilityLocationProblem(TwoStageStocProg):
                 self.ef_solving_results['dual'].append(model.cbGet(gp.GRB.Callback.MIPSOL_OBJBND))
                 self.ef_solving_results['incumbent'].append(model.cbGetSolution(model._x ))
 
+
         # make extensive form 
         scenarios = self.get_scenarios(n_scenarios, test_set)
 

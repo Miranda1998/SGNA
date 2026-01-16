@@ -1,0 +1,144 @@
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:06:47 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Set parameter NodefileStart to value 0.5
+Set parameter NodefileDir to value "node_files\s20_ts0"
+Set parameter MIPGap to value 0.01
+Set parameter TimeLimit to value 7200
+Set parameter Threads to value 1
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  7200
+MIPGap  0.01
+NodefileStart  0.5
+Threads  1
+
+Optimize a model with 15135400 rows, 5061810 columns and 40181000 nonzeros
+Model fingerprint: 0x664061dd
+Variable types: 0 continuous, 5061810 integer (5040010 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 6e+01]
+  Objective range  [5e-01, 2e+01]
+  Bounds range     [1e+00, 3e+01]
+  RHS range        [1e+00, 6e+01]
+Presolve removed 15095811 rows and 5002171 columns
+Presolve time: 4.24s
+Presolved: 39589 rows, 59639 columns, 257224 nonzeros
+Variable types: 0 continuous, 59639 integer (49079 binary)
+Found heuristic solution: objective -200.0000000
+Performing another presolve...
+Presolve removed 27640 rows and 30049 columns
+Presolve time: 0.87s
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.3741939e+03   1.870283e+04   0.000000e+00      8s
+   11447    9.4195964e+01   0.000000e+00   0.000000e+00      9s
+   11447    9.4195964e+01   0.000000e+00   0.000000e+00      9s
+
+Root relaxation: objective 9.419596e+01, 11447 iterations, 0.31 seconds (0.53 work units)
+Total elapsed time = 8.69s (DegenMoves)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.19596    0 1667 -200.00000   94.19596   147%     -    8s
+     0     0   93.54670    0 1651 -200.00000   93.54670   147%     -    8s
+H    0     0                      -0.0000000   93.54670      -     -    9s
+H    0     0                       1.6816915   93.54670  5463%     -    9s
+     0     0   77.47624    0 3164    1.68169   77.47624  4507%     -    9s
+     0     0   77.47624    0 3165    1.68169   77.47624  4507%     -    9s
+     0     0   77.47624    0 3161    1.68169   77.47624  4507%     -    9s
+H    0     0                      11.1201337   77.19676   594%     -    9s
+     0     0   71.81729    0 3267   11.12013   71.81729   546%     -    9s
+     0     0   71.81729    0 3269   11.12013   71.81729   546%     -    9s
+     0     0   71.80391    0 2876   11.12013   71.80391   546%     -   10s
+     0     0   71.80391    0 2854   11.12013   71.80391   546%     -   10s
+     0     0   71.74707    0 2860   11.12013   71.74707   545%     -   10s
+     0     0   71.73905    0 2862   11.12013   71.73905   545%     -   10s
+     0     0   58.68100    0 3551   11.12013   58.68100   428%     -   10s
+     0     0   58.24828    0 2799   11.12013   58.24828   424%     -   10s
+     0     0   58.23292    0 2681   11.12013   58.23292   424%     -   10s
+     0     0   58.23292    0 2703   11.12013   58.23292   424%     -   10s
+     0     0   56.53396    0 2725   11.12013   56.53396   408%     -   10s
+H    0     0                      11.5911424   56.53396   388%     -   11s
+H    0     0                      15.9055315   56.53396   255%     -   11s
+     0     0   56.53261    0 2814   15.90553   56.53261   255%     -   11s
+     0     0   56.37862    0 2705   15.90553   56.37862   254%     -   11s
+H    0     0                      18.3060112   56.37862   208%     -   11s
+H    0     0                      18.9500840   56.37862   198%     -   12s
+     0     0   56.36437    0 2783   18.95008   56.36437   197%     -   12s
+     0     0   56.23309    0 2751   18.95008   56.23309   197%     -   12s
+     0     0   56.23309    0 2726   18.95008   56.23309   197%     -   12s
+     0     0   56.23309    0 1826   18.95008   56.23309   197%     -   12s
+H    0     0                      19.1614829   56.23309   193%     -   12s
+H    0     0                      22.4586359   56.23309   150%     -   13s
+H    0     0                      22.9916041   56.23309   145%     -   13s
+     0     2   56.19632    0 1640   22.99160   56.19632   144%     -   13s
+H   27    21                      27.7798939   51.36495  84.9%   270   14s
+H   27    21                      27.8262917   51.36495  84.6%   270   14s
+H   27    21                      28.4703645   51.36495  80.4%   270   14s
+    81    58   33.96673   67  296   28.47036   51.36495  80.4%  92.4   15s
+   657   436   30.27727  118 2244   28.47036   47.74381  67.7%  21.7   20s
+   709   470   32.46884   32 2094   28.47036   43.04648  51.2%  20.1   25s
+   745   496   31.55033   31 1705   28.47036   42.45379  49.1%   182   30s
+   798   531   28.59641  140 1648   28.47036   41.69942  46.5%   169   35s
+
+Cutting planes:
+  Gomory: 14
+  Cover: 187
+  Implied bound: 147
+  Projected implied bound: 3
+  Clique: 122
+  MIR: 15
+  StrongCG: 23
+  Flow cover: 308
+  GUB cover: 84
+  Zero half: 184
+  Network: 1
+  RLT: 48
+  Relax-and-lift: 36
+
+Explored 903 nodes (212530 simplex iterations) in 39.78 seconds (75.38 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 10: 28.4704 27.8263 27.7799 ... 11.5911
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 2.847036447528e+01, best bound 2.847036447528e+01, gap 0.0000%
+
+User-callback calls 10745, time in user-callback 2.54 sec
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 13:14:07 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_ef_s20_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Set parameter NodefileStart to value 0.5
+Set parameter NodefileDir to value "node_files\s20_ts0"
+Set parameter MIPGap to value 0.01
+Set parameter TimeLimit to value 7200
+Set parameter Threads to value 1
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  7200
+MIPGap  0.01
+NodefileStart  0.5
+Threads  1
+
+Optimize a model with 15135400 rows, 5061810 columns and 40181000 nonzeros
+Model fingerprint: 0x5b6cb34a
+Variable types: 0 continuous, 5061810 integer (5040010 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 9e+01]
+  Objective range  [5e-01, 2e+01]
+  Bounds range     [1e+00, 3e+01]
+  RHS range        [1e+00, 9e+01]

@@ -8,7 +8,7 @@ verbose=0
 seed=7
 
 # base相关参数
-base_costs_each=20
+base_costs_each=50
 my_drone_each_base = 3
 
 # 无人机相关参数

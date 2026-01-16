@@ -1,0 +1,57 @@
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:15:27 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_e_s40_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 1537 rows, 1547 columns and 8705 nonzeros
+Model fingerprint: 0xa4040037
+Variable types: 1025 continuous, 522 integer (522 binary)
+Coefficient statistics:
+  Matrix range     [4e-07, 1e+05]
+  Objective range  [1e+00, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-04, 1e+05]
+Presolve removed 1474 rows and 1486 columns
+Presolve time: 0.00s
+Presolved: 63 rows, 61 columns, 398 nonzeros
+Variable types: 38 continuous, 23 integer (23 binary)
+Found heuristic solution: objective 1.6582303
+
+Root relaxation: objective 3.302852e+01, 39 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   33.02852    0    7    1.65823   33.02852  1892%     -    0s
+     0     0   33.02174    0    7    1.65823   33.02174  1891%     -    0s
+     0     0   33.02107    0    6    1.65823   33.02107  1891%     -    0s
+H    0     0                      26.1357765   33.02107  26.3%     -    0s
+H    0     0                      30.2176472   33.02107  9.28%     -    0s
+H    0     0                      30.5837384   33.02107  7.97%     -    0s
+     0     0          -    0        30.58374   30.86512  0.92%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Cover: 6
+  MIR: 8
+  Flow cover: 6
+  RLT: 4
+
+Explored 1 nodes (50 simplex iterations) in 0.10 seconds (0.01 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 4: 30.5837 30.2176 26.1358 1.65823 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 3.058373843835e+01, best bound 3.086511809040e+01, gap 0.9200%
+
+User-callback calls 520, time in user-callback 0.00 sec

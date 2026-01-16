@@ -410,7 +410,8 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
                 self.ef_solving_results['incumbent'].append(model.cbGetSolution(model._x ))
 
         # make extensive form
-        scenarios = self.get_scenarios(n_scenarios, test_set, if_ef_train=True)
+        # 训练集固定情景数
+        scenarios = self.get_scenarios(20, test_set, if_ef_train=True)
         print("scenarios:", scenarios[0][0])
         model = self._make_extensive_model(scenarios)
 
@@ -604,9 +605,11 @@ class DroneBaseLocationRoutingProblem(TwoStageStocProg):
 
         if if_ef_train:
             test_set_int = 1998
+            print('n_scenarios:', n_scenarios)
             # test_set_int = int(test_set)
         else:
             test_set_int = int(test_set)
+            print('n_scenarios:', n_scenarios)
 
         scenarios = []
         for _ in range(n_scenarios):

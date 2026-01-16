@@ -227,6 +227,10 @@ if __name__ == '__main__':
     #       python runner.py --problems dblrp_10_10 --eval_nn_e 1 --as_dat 1
     #       python runner.py --problems dblrp_10_10 --eval_ef 1 --as_dat 1
 
+    # start /b eval_all.bat > eval_all.log 2>&1
+    # taskkill /F /IM python.exe
+    # taskkill /F /IM cmd.exe
+
 
     parser.add_argument('--as_dat', type=int, default=0,
          help = 'Indicator for saving commands to .dat files for use with parallel computing.')

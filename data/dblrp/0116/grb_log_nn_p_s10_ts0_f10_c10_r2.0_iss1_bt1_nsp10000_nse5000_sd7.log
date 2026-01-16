@@ -1,0 +1,203 @@
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 11:49:38 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s10_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 7690 rows, 7700 columns and 42250 nonzeros
+Model fingerprint: 0xc480ee47
+Variable types: 5130 continuous, 2570 integer (2570 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [1e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-02, 1e+05]
+Found heuristic solution: objective -57.0641014
+Presolve removed 7252 rows and 7273 columns
+Presolve time: 0.05s
+Presolved: 438 rows, 427 columns, 2528 nonzeros
+Variable types: 291 continuous, 136 integer (136 binary)
+
+Root relaxation: objective 4.264838e+01, 160 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   42.64838    0   11  -57.06410   42.64838   175%     -    0s
+H    0     0                      42.6482902   42.64838  0.00%     -    0s
+     0     0   42.64838    0   11   42.64829   42.64838  0.00%     -    0s
+
+Explored 1 nodes (168 simplex iterations) in 0.07 seconds (0.05 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 2: 42.6483 -57.0641 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 4.264829018077e+01, best bound 4.264829018077e+01, gap 0.0000%
+
+User-callback calls 566, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:30:57 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s10_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 7690 rows, 7700 columns and 42250 nonzeros
+Model fingerprint: 0x4a333d8d
+Variable types: 5130 continuous, 2570 integer (2570 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [1e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-02, 1e+05]
+Presolve removed 7052 rows and 7154 columns
+Presolve time: 0.07s
+Presolved: 638 rows, 546 columns, 3884 nonzeros
+Variable types: 409 continuous, 137 integer (137 binary)
+Found heuristic solution: objective 42.7558858
+
+Explored 0 nodes (0 simplex iterations) in 0.14 seconds (0.05 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 42.7559 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 4.275588582879e+01, best bound 4.275588582879e+01, gap 0.0000%
+
+User-callback calls 476, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:42:18 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s10_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 7690 rows, 7700 columns and 42250 nonzeros
+Model fingerprint: 0x46e9760e
+Variable types: 5130 continuous, 2570 integer (2570 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [1e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [3e-03, 1e+05]
+Found heuristic solution: objective -56.9688476
+Presolve removed 7284 rows and 7305 columns
+Presolve time: 0.04s
+Presolved: 406 rows, 395 columns, 2328 nonzeros
+Variable types: 270 continuous, 125 integer (125 binary)
+
+Root relaxation: objective 4.274025e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   42.74025    0   10  -56.96885   42.74025   175%     -    0s
+H    0     0                      42.7401502   42.74025  0.00%     -    0s
+     0     0   42.74025    0   10   42.74015   42.74025  0.00%     -    0s
+
+Explored 1 nodes (131 simplex iterations) in 0.05 seconds (0.05 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 2: 42.7402 -56.9688 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 4.274015015350e+01, best bound 4.274015015350e+01, gap 0.0000%
+
+User-callback calls 566, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:50:35 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s10_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 7690 rows, 7700 columns and 42250 nonzeros
+Model fingerprint: 0xdcaec65e
+Variable types: 5130 continuous, 2570 integer (2570 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [1e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [4e-02, 1e+05]
+Presolve removed 7052 rows and 7154 columns
+Presolve time: 0.03s
+Presolved: 638 rows, 546 columns, 3884 nonzeros
+Variable types: 409 continuous, 137 integer (137 binary)
+Found heuristic solution: objective 42.7558858
+
+Explored 0 nodes (0 simplex iterations) in 0.03 seconds (0.05 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 42.7559 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 4.275588582879e+01, best bound 4.275588582879e+01, gap 0.0000%
+
+User-callback calls 474, time in user-callback 0.00 sec
+
+Gurobi 12.0.1 (win64) logging started Fri Jan 16 12:56:22 2026
+
+Set parameter LogFile to value "data\dblrp\grb_log_nn_p_s10_ts0_f10_c10_r2.0_iss1_bt1_nsp10000_nse5000_sd7.log"
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 11.0 (26100.2))
+
+CPU model: Intel(R) Core(TM) i9-14900K, instruction set [SSE2|AVX|AVX2]
+Thread count: 24 physical cores, 32 logical processors, using up to 1 threads
+
+Non-default parameters:
+TimeLimit  360
+MIPGap  0.01
+Threads  1
+
+Optimize a model with 7690 rows, 7700 columns and 42250 nonzeros
+Model fingerprint: 0x61dd810d
+Variable types: 5130 continuous, 2570 integer (2570 binary)
+Coefficient statistics:
+  Matrix range     [1e-05, 1e+05]
+  Objective range  [1e-01, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e-02, 1e+05]
+Presolve removed 7339 rows and 7350 columns
+Presolve time: 0.02s
+Presolved: 351 rows, 350 columns, 2093 nonzeros
+Variable types: 230 continuous, 120 integer (120 binary)
+Found heuristic solution: objective 45.0029860
+
+Explored 0 nodes (0 simplex iterations) in 0.02 seconds (0.04 work units)
+Thread count was 1 (of 32 available processors)
+
+Solution count 1: 45.003 
+
+Optimal solution found (tolerance 1.00e-02)
+Best objective 4.500298603017e+01, best bound 4.500298603017e+01, gap 0.0000%
+
+User-callback calls 473, time in user-callback 0.00 sec

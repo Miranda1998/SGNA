@@ -12,13 +12,22 @@ def _chi2_quantile_df2(alpha: float) -> float:
     return float(-2.0 * math.log(max(1e-12, 1.0 - alpha)))
 
 
-def reparameterize(mu, logvar):
+# def reparameterize(mu, logvar):
+#     std = torch.exp(0.5 * logvar)
+#     eps = torch.randn_like(std)
+#
+#     tau_z = 1.5
+#
+#     return mu + eps * (std * tau_z)
+
+def reparameterize(mu, logvar, generator=None):
     std = torch.exp(0.5 * logvar)
-    eps = torch.randn_like(std)
+    if generator is None:
+        eps = torch.randn_like(std)
+    else:
+        eps = torch.randn(std.shape, device=std.device, dtype=std.dtype, generator=generator)
+    return mu + eps * std
 
-    tau_z = 1.5
-
-    return mu + eps * (std * tau_z)
 
 
 def kl_normal(mu_q, logvar_q, mu_p, logvar_p):
@@ -430,9 +439,10 @@ class CVAE(nn.Module):
 
     @torch.no_grad()
     def sample(self, x_hist, stat=None, K=10, seed=None):
-
-        print("seed=", seed)
-        # print("rng head:", torch.rand(3, device=x_hist.device))
+        gen = None
+        if seed is not None:
+            gen = torch.Generator(device=x_hist.device)
+            gen.manual_seed(int(seed))
 
         self.eval()
         B = x_hist.size(0)
@@ -441,24 +451,83 @@ class CVAE(nn.Module):
 
         h_enc = self.enc_hist(x_hist)
         mu_p, logvar_p = self.prior(torch.cat([h_enc, stat], dim=1))
+
+        # --- 调试：看看 prior 方差是否塌了 ---
+        std_p = torch.exp(0.5 * logvar_p)
+        print("seed raw=", seed, "seed int=", None if seed is None else int(seed))
+        print("prior logvar stats:", logvar_p.min().item(), logvar_p.mean().item(), logvar_p.max().item())
+        print("prior std stats:", std_p.min().item(), std_p.mean().item(), std_p.max().item())
+
         last_pos = x_hist[:, -1, :2]
 
         trajs, prior_lp, mus, logvars = [], [], [], []
-        for _ in range(K):
-            z = reparameterize(mu_p, logvar_p)
+        for k in range(K):
+            z = reparameterize(mu_p, logvar_p, generator=gen)
+
+            if k == 0:
+                print("z head:", z[0, :5].detach().cpu())
 
             cond = torch.cat([h_enc, z, stat], dim=1)
-            # 关键：采样时也把 z 传入解码器
             mu, logvar, _ = self.dec(cond, z, last_pos=last_pos)
-            y_sample = mu
+
+            # ✅ 如果你想“scenario 是采样结果”，这里必须采样
+            y_sample = reparameterize(mu, logvar, generator=gen)
+
             lp = -0.5 * (((z - mu_p) ** 2 / torch.exp(logvar_p)) + logvar_p + LOG_2PI).sum(dim=1)
 
-            trajs.append(y_sample); mus.append(mu); logvars.append(logvar); prior_lp.append(lp)
+            trajs.append(y_sample);
+            mus.append(mu);
+            logvars.append(logvar);
+            prior_lp.append(lp)
 
         trajs = torch.stack(trajs, dim=0)
         mus = torch.stack(mus, dim=0)
         logvars = torch.stack(logvars, dim=0)
         prior_logprob = torch.stack(prior_lp, dim=0)
         return trajs, prior_logprob, mus, logvars
+
+
+    # def sample(self, x_hist, stat=None, K=10, seed=None):
+    #
+    #     print("seed=", seed)
+    #     # print("rng head:", torch.rand(3, device=x_hist.device))
+    #
+    #     # 只在本次调用内使用的 RNG（不污染全局）
+    #     gen = None
+    #     if seed is not None:
+    #         # generator 的 device 要和你生成随机数的 device 一致
+    #         gen = torch.Generator(device=x_hist.device)
+    #         gen.manual_seed(int(seed))
+    #
+    #
+    #     self.eval()
+    #     B = x_hist.size(0)
+    #     if stat is None:
+    #         stat = x_hist.new_zeros(B, 0)
+    #
+    #     h_enc = self.enc_hist(x_hist)
+    #     mu_p, logvar_p = self.prior(torch.cat([h_enc, stat], dim=1))
+    #     last_pos = x_hist[:, -1, :2]
+    #
+    #     trajs, prior_lp, mus, logvars = [], [], [], []
+    #     for _ in range(K):
+    #         # z = reparameterize(mu_p, logvar_p)
+    #         # ✅ 关键：用局部 generator 采样 eps，从而让 z 完全由 seed 控制
+    #         z = reparameterize(mu_p, logvar_p, generator=gen)
+    #
+    #         cond = torch.cat([h_enc, z, stat], dim=1)
+    #         # 关键：采样时也把 z 传入解码器
+    #         mu, logvar, _ = self.dec(cond, z, last_pos=last_pos)
+    #         y_sample = mu
+    #         lp = -0.5 * (((z - mu_p) ** 2 / torch.exp(logvar_p)) + logvar_p + LOG_2PI).sum(dim=1)
+    #
+    #         trajs.append(y_sample); mus.append(mu); logvars.append(logvar); prior_lp.append(lp)
+    #
+    #     trajs = torch.stack(trajs, dim=0)
+    #     mus = torch.stack(mus, dim=0)
+    #     logvars = torch.stack(logvars, dim=0)
+    #     prior_logprob = torch.stack(prior_lp, dim=0)
+    #     return trajs, prior_logprob, mus, logvars
+
 
 
